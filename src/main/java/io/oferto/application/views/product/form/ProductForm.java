@@ -41,7 +41,11 @@ public class ProductForm extends Dialog {
 	
 	private Product product;	
 	private Binder<Product> productBinder = new BeanValidationBinder<Product>(Product.class);
-	
+
+
+
+
+
 	private FormLayout formLayout;
 	
 	private ComboBox<Warehouse> warehouse;

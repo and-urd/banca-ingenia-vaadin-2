@@ -37,94 +37,24 @@ public class AboutView extends VerticalLayout {
         this.categoriaService = categoriaService;
 
         addClassName("about-view");
-        
         setSizeFull();
         setPadding(true);
-        
-//        this.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
-
-//        VerticalLayout layoutHorCrearCategoria = new VerticalLayout();
-//        layoutHorCrearCategoria.add(new H3("Crear categoria"));
-//        TextField txtFieldtipoCategoria = new TextField();
-//
-//        Button btnGuardar = new Button("Guardar");
-//        btnGuardar.addClickListener( funcion ->{
-//            Categoria nuevaCategoria = new Categoria();
-//
-//            if (txtFieldtipoCategoria.getValue().equals("") == false){
-//
-//                nuevaCategoria.setTipoCategoria(txtFieldtipoCategoria.getValue());
-//                if(categoriaService.crearCategoria(nuevaCategoria) != null){
-//                    Notification.show("Creada la categoria: " + nuevaCategoria.getTipoCategoria(), 2000, Notification.Position.MIDDLE);
-//                }else{
-//                    Notification.show("Categoria ya existe.", 2000, Notification.Position.MIDDLE);
-//                }
-//
-//            }else{
-//                Notification.show("Nombre de categoria necesario", 2000, Notification.Position.MIDDLE);
-//            }
-//        });
-//
-//        layoutHorCrearCategoria.add(txtFieldtipoCategoria, btnGuardar, new Hr());
-//
-//        this.add(layoutHorCrearCategoria);
-
-        ///////////////////////////////////////////////////////
-        FormLayout layoutWithBinder = new FormLayout();
-        Binder<Categoria> binder = new Binder<>();
-
-        // Entidad Categoria que se va a bindear
-        Categoria categoriaSiendoEditada = new Categoria();
-
-        // Creo el textField
-        TextField tipoCategoria = new TextField();
-        tipoCategoria.setValueChangeMode(ValueChangeMode.EAGER);
-
-        VerticalLayout layoutEntrada = new VerticalLayout();
-
-        layoutEntrada.add(new H4("Crear categoria"),tipoCategoria);
-
-        Label infoLabel = new Label();
-        NativeButton save = new NativeButton("Save");
-        NativeButton reset = new NativeButton("Reset");
-
-        layoutWithBinder.addFormItem(tipoCategoria, "Tipo de categoria:");
-
-        HorizontalLayout actions = new HorizontalLayout();
-        actions.add(save, reset);
-        save.getStyle().set("marginRight", "10px");
 
 
-        tipoCategoria.setRequiredIndicatorVisible(true);
-        binder.forField(tipoCategoria)
-                .withValidator(new StringLengthValidator(
-                        "Por favor añadir el tipo de Categoria", 1, null))
-                .bind(Categoria::getTipoCategoria, Categoria::setTipoCategoria);
-
-
-
-        save.addClickListener(event -> {
-            if (binder.writeBeanIfValid(categoriaSiendoEditada)) {
-//                infoLabel.setText("Saved bean values: " + categoriaSiendoEditada);
-
-                if(categoriaService.crearCategoria(categoriaSiendoEditada) != null){
-                    Notification.show("Categoria creada.", 2000, Notification.Position.MIDDLE);
-                }else{
-                    Notification.show("Esta categoria ya existe.", 2000, Notification.Position.MIDDLE);
-                }
-
-            } else {
-                BinderValidationStatus<Categoria> validate = binder.validate();
-
-                infoLabel.setText("Se ha producido un error");
-            }
+        // Botón para crear una nueva Categoria
+        Button btnCrearCategoria = new Button("Crear Categoria");
+        btnCrearCategoria.addClickListener(event ->{
+            CategoriaForm formularioCategoria = new CategoriaForm(null, categoriaService);
+            formularioCategoria.open();
         });
-        reset.addClickListener(event -> {
 
-            binder.readBean(null);
-            infoLabel.setText("");
-        });
-        add(layoutEntrada,layoutWithBinder, actions, infoLabel);
+        this.add(btnCrearCategoria, new Hr());
+
+
+
+
+
+
 
     }
 
