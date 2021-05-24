@@ -54,10 +54,29 @@ public class TarjetaServiceImpl implements TarjetaService {
                 }
             }
         }
-
-
-
-
         return listadoResultado;
     }
+
+    @Override
+    public Tarjeta crearTarjeta(Tarjeta tarjeta) {
+
+        if(tarjetaRepository.existsByNumeroTarjeta(tarjeta.getNumeroTarjeta()) == true
+                && tarjeta.getId()==null){
+            // Si existe ya este número de cuenta
+            return null;
+        }else{
+            return tarjetaRepository.save(tarjeta);
+        }
+    }
+
+    @Override
+    public List<Tarjeta> encuentraTarjetas() {
+        return tarjetaRepository.findAll();
+    }
+
+    @Override
+    public void borrarTarjeta(Tarjeta tarjeta) {
+        tarjetaRepository.deleteById(tarjeta.getId());
+    }
+
 }

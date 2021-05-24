@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name="tarjetas")
-public class Tarjeta {
+public class Tarjeta implements Cloneable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -121,5 +121,20 @@ public class Tarjeta {
                 '}';
 
         // TODO - faltan campos FK
+    }
+
+
+    public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        }
+        catch(CloneNotSupportedException e)
+        {
+            // No deberia suceder
+        }
+        return clone;
     }
 }
