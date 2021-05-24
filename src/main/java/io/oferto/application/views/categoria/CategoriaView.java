@@ -5,6 +5,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
@@ -116,7 +117,12 @@ public class CategoriaView extends VerticalLayout {
     private Component RemoveButton(Grid<Categoria> gridProduct, Categoria categoria) {
         AuthenticatedButton button = new AuthenticatedButton("Borrar");
             button.addClickListener(event -> {
-                categoriaService.borrarCategoria(categoria);
+                try{
+                    categoriaService.borrarCategoria(categoria);
+                }catch(Exception e){
+                    logger.error("Error durante el borrado de la categoria: {}", categoria.getTipoCategoria());
+                    Notification.show("Se ha producido un error.", 2000, Notification.Position.MIDDLE);
+                }
                 loadData();
                 loadGrid();
             });
