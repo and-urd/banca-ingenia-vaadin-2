@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "categorias")
-public class Categoria {
+public class Categoria implements Cloneable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,5 +53,19 @@ public class Categoria {
                 "id=" + id +
                 ", tipoCategoria='" + tipoCategoria + '\'' +
                 '}';
+    }
+
+    public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        }
+        catch(CloneNotSupportedException e)
+        {
+            // No deberia suceder
+        }
+        return clone;
     }
 }

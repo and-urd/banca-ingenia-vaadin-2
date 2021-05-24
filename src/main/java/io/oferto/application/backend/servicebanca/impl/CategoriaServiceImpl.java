@@ -5,6 +5,8 @@ import io.oferto.application.backend.repositorybanca.CategoriaRepository;
 import io.oferto.application.backend.servicebanca.CategoriaService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
 
@@ -24,5 +26,15 @@ public class CategoriaServiceImpl implements CategoriaService {
             return categoriaRepository.save(categoria);
         }
 
+    }
+
+    @Override
+    public List<Categoria> encuentraCategorias() {
+        return categoriaRepository.findAll();
+    }
+
+    @Override
+    public void borrarCategoria(Categoria categoria) {
+        categoriaRepository.deleteById(categoria.getId());
     }
 }

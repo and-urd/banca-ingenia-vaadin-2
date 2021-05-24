@@ -1,4 +1,4 @@
-package io.oferto.application.views.about;
+package io.oferto.application.views.categoria;
 
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -31,10 +31,20 @@ public class CategoriaForm extends Dialog {
         Binder<Categoria> binder = new Binder<>();
 
         // Entidad Categoria que se va a bindear
-        Categoria categoriaSiendoEditada = new Categoria();
+        Categoria categoriaSiendoEditada;
+        if(categoria == null){
+            categoriaSiendoEditada = new Categoria();
+        }else{
+            categoriaSiendoEditada = (Categoria) categoria.clone();
+        }
 
         // Creo el textField
         TextField txtFdtipoCategoria = new TextField();
+        if(categoria == null){
+            txtFdtipoCategoria.setValue("");
+        }else{
+            txtFdtipoCategoria.setValue(categoriaSiendoEditada.getTipoCategoria());
+        }
         txtFdtipoCategoria.setValueChangeMode(ValueChangeMode.EAGER);
 
         VerticalLayout layoutEntrada = new VerticalLayout();
@@ -65,6 +75,7 @@ public class CategoriaForm extends Dialog {
 
                 if(categoriaService.crearCategoria(categoriaSiendoEditada) != null){
                     Notification.show("Categoria creada.", 2000, Notification.Position.MIDDLE);
+
                     this.close();
                 }else{
                     infoLabel.setText(categoriaSiendoEditada.getTipoCategoria() + ", ya existe");
