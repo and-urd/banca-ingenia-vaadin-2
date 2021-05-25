@@ -26,10 +26,13 @@ import com.vaadin.flow.theme.lumo.Lumo;
 
 import io.oferto.application.security.SecurityConfiguration;
 import io.oferto.application.views.categoria.CategoriaView;
+import io.oferto.application.views.cuentas.CuentasView;
 import io.oferto.application.views.dashboard.DashboardView;
+import io.oferto.application.views.movimientos.MovimientosView;
 import io.oferto.application.views.product.ProductView;
 import io.oferto.application.views.stock.StockView;
 import io.oferto.application.views.tarjeta.TarjetaView;
+import io.oferto.application.views.tarjetas.TarjetasView;
 import io.oferto.application.views.warehouse.WarehouseView;
 
 import com.vaadin.flow.router.PageTitle;
@@ -119,6 +122,9 @@ public class MainView extends AppLayout {
     	tabs.add(createTab("Stock List", StockView.class));
     	tabs.add(createTab("Categoria", CategoriaView.class));
         tabs.add(createTab("Tarjeta", TarjetaView.class));
+        tabs.add(createTab("Tarjetas", TarjetasView.class));
+        tabs.add(createTab("Cuentas", CuentasView.class));
+        tabs.add(createTab("Movimientos", MovimientosView.class));
     	    	
     	return tabs.toArray(new Tab[tabs.size()]);
     }

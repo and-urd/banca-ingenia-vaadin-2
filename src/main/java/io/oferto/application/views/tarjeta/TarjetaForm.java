@@ -17,8 +17,6 @@ import com.vaadin.flow.data.validator.DateRangeValidator;
 import com.vaadin.flow.data.validator.DoubleRangeValidator;
 import com.vaadin.flow.data.validator.StringLengthValidator;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import io.oferto.application.backend.model.Warehouse;
-import io.oferto.application.backend.modelbanca.Categoria;
 import io.oferto.application.backend.modelbanca.Cuenta;
 import io.oferto.application.backend.modelbanca.Tarjeta;
 import io.oferto.application.backend.servicebanca.CuentaService;

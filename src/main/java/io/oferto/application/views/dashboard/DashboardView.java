@@ -36,77 +36,77 @@ import io.oferto.application.views.main.MainView;
 public class DashboardView extends VerticalLayout {
 	private WarehouseService warehouseService;
 	private StockService stockService;
-	
+
 	private List<Warehouse> warehouses;
 	private LeafletMap warehouseMap;
-	
+
 	public DashboardView(WarehouseService warehouseService) {
 		this.warehouseService = warehouseService;
-		
+
 		this.setSizeFull();
 		this.setPadding(false);
-				
+
 		// set warehouse map
 		MapOptions options = new DefaultMapOptions();
-				
+
 		//options.setCenter(getCenterMap());
 		options.setZoom(5);
 		warehouseMap = new LeafletMap(options );
-		warehouseMap.setBaseUrl("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");		
-		
+		warehouseMap.setBaseUrl("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
+
 		ScaleControl scaleControl = new ScaleControl();
 		scaleControl.setMaxWidth(500);
 		scaleControl.setPosition(ControlPosition.bottomleft);
 		scaleControl.addTo(warehouseMap);
-		
+
 		add(warehouseMap);
-		
-		// get all warehouses 
+
+		// get all warehouses
 		getWarehouses();
-		
+
 		// fill warehouse markers
 		locateWarehouses();
 	}
-	
+
 	private void getWarehouses() {
 		try {
 			 warehouses = warehouseService.findAll();
 		} catch (Exception ex) {
 			Notification.show(ex.getLocalizedMessage());
-		}	
+		}
 	}
-	
-	private void locateWarehouses() {	
+
+	private void locateWarehouses() {
 		List<LatLng> latLngs = new ArrayList<LatLng>();
-		
-		try {			 
-			 for (Warehouse warehouse : warehouses) {				 
+
+		try {
+			 for (Warehouse warehouse : warehouses) {
 				 Marker marker = new Marker(new LatLng(warehouse.getLatitude(), warehouse.getLongitude()));
-				 
+
 				 marker.bindTooltip(warehouse.getName());
 				 marker.setAttribution(warehouse.getId().toString());
-				 marker.onClick((event) -> {					 
+				 marker.onClick((event) -> {
 					 showWarehouseStock(marker.getAttribution());
 				 });
-				 
+
 				 marker.addTo(warehouseMap);
 				 latLngs.add(marker.getLatLng());
-		     }	
-			 
+		     }
+
 			 // fit maximun bound
 			 warehouseMap.fitBounds(new LatLngBounds(latLngs));
 		} catch (Exception ex) {
 			Notification.show(ex.getLocalizedMessage());
-		}		
-	}	
-	
-	private void showWarehouseStock(String warehouseId) {		
+		}
+	}
+
+	private void showWarehouseStock(String warehouseId) {
 		Map<String, List<String>> queryParameters = new HashMap<String, List<String>>() {
-		    { 
+		    {
 		    	put("warehouseId",Arrays.asList(warehouseId));
 		    }
 		};
-		
+
 		UI.getCurrent().navigate("stock", new QueryParameters(queryParameters));
 	}
 }
