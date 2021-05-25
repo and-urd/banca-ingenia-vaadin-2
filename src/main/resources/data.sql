@@ -1,9 +1,9 @@
 
 
 --CUENTAS
-INSERT INTO cuentas(id, numero_cuenta, tipo_cuenta, saldo) VALUES (1, "23984238947", "Corriente", 2150);
-INSERT INTO cuentas(id, numero_cuenta, tipo_cuenta, saldo) VALUES (2, "65165778947", "Pensiones", 1000);
-INSERT INTO cuentas(id, numero_cuenta, tipo_cuenta, saldo) VALUES (3, "16116515947", "Pensiones", 2000);
+INSERT INTO cuentas(id, numero_cuenta, tipo_cuenta, saldo, entidad) VALUES (1, "23984238947", "Corriente", 2150, "BBVA");
+INSERT INTO cuentas(id, numero_cuenta, tipo_cuenta, saldo, entidad) VALUES (2, "65165778947", "Pensiones", 1000, "BBVA");
+INSERT INTO cuentas(id, numero_cuenta, tipo_cuenta, saldo, entidad) VALUES (3, "16116515947", "Pensiones", 2000, "CAIXA");
 
 --USERS
 INSERT INTO usuarios(id, username, email, direccion, telefono) VALUES (1, "rafa", "rafa@email.com", "Calle Falsa 123 Malaga", "654123987");

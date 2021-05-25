@@ -12,6 +12,9 @@ public class Cuenta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="entidad")
+    private String entidad;
+
     @Column(name="numero_cuenta")
     private String numeroCuenta;
 
@@ -97,6 +100,14 @@ public class Cuenta {
         this.movimientos = movimientos;
     }
 
+    public String getEntidad() {
+        return entidad;
+    }
+
+    public void setEntidad(String entidad) {
+        this.entidad = entidad;
+    }
+
     @Override
     public String toString() {
         return "Cuenta{" +
@@ -104,6 +115,7 @@ public class Cuenta {
                 ", numeroCuenta='" + numeroCuenta + '\'' +
                 ", tipoCuenta='" + tipoCuenta + '\'' +
                 ", saldo=" + saldo +
+                ", entidad= " + entidad +
                 '}'; //TODO: Agregar campo user, tarjeta, movimiento
     }
 }
