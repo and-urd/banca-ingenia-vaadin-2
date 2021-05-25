@@ -15,6 +15,8 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -138,13 +140,14 @@ public class MainView extends AppLayout {
         tabs.add(createTab("Tarjetas", TarjetasView.class));
         tabs.add(createTab("Cuentas", CuentasView.class));
         tabs.add(createTab("Movimientos", MovimientosView.class));
-    	    	
     	return tabs.toArray(new Tab[tabs.size()]);
     }
     
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
         final Tab tab = new Tab();
-        tab.add(new RouterLink(text, navigationTarget));
+
+        // todo -- poner iconos correspondientes
+        tab.add(/*new Icon(VaadinIcon.USERS),*/ new RouterLink(text, navigationTarget));
         ComponentUtil.setData(tab, Class.class, navigationTarget);
         return tab;
     }
