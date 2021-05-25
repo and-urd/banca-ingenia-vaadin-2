@@ -136,6 +136,9 @@ public class TarjetasView extends VerticalLayout {
     }
 
     public static String tarjetaUltimosDigitos(String numeroTarjeta) {
+        if (numeroTarjeta.isEmpty()){
+            return numeroTarjeta;
+        }
         int size = numeroTarjeta.length();
         return "***" + numeroTarjeta.substring(size - 4);
     }
