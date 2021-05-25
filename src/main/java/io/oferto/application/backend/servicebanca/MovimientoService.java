@@ -22,4 +22,7 @@ public interface MovimientoService {
 
     // Recupera movimiento por su id
     Optional<Movimiento> movimientoPorId(Long id);
+
+    // Calcula el saldo total realizado por una tarjeta (numero de tarjeta (string))
+    Double saldoTotalTarjeta(String numTarjeta);
 }

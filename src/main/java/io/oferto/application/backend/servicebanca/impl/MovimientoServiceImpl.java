@@ -88,4 +88,21 @@ public class MovimientoServiceImpl implements MovimientoService {
 
         return movimiento;
     }
+
+    @Override
+    public Double saldoTotalTarjeta(String numTarjeta) {
+        List<Movimiento> listadoMovimientos = this.recuperaTodosMovimientos();
+        Double saldoTotal = 0d;
+
+        for (Movimiento movimiento:
+                listadoMovimientos) {
+            if(movimiento.getNumTarjeta().equals(numTarjeta)){
+                saldoTotal += movimiento.getCantidad();
+            }
+        }
+
+        return saldoTotal;
+    }
+
+
 }

@@ -27,7 +27,8 @@ import com.vaadin.flow.theme.lumo.Lumo;
 import io.oferto.application.security.SecurityConfiguration;
 import io.oferto.application.views.categoria.CategoriaView;
 import io.oferto.application.views.cuentas.CuentasView;
-import io.oferto.application.views.dashboard.DashboardView;
+//import io.oferto.application.views.dashboard.DashboardView;
+import io.oferto.application.views.inicio.InicioView;
 import io.oferto.application.views.movimientos.MovimientosView;
 import io.oferto.application.views.product.ProductView;
 import io.oferto.application.views.stock.StockView;
@@ -115,11 +116,12 @@ public class MainView extends AppLayout {
     private Component[] createMenuItems() {    	    	
     	List<Tab> tabs = new ArrayList<Tab>();
     	
-    	tabs.add(createTab("Dashboard", DashboardView.class));
+//    	tabs.add(createTab("Dashboard", DashboardView.class));
     	if (SecurityConfiguration.isAdmin())
     		tabs.add(createTab("Warehouse", WarehouseView.class));
     	tabs.add(createTab("Product Master", ProductView.class));
     	tabs.add(createTab("Stock List", StockView.class));
+        tabs.add(createTab("Inicio", InicioView.class));
     	tabs.add(createTab("Categoria", CategoriaView.class));
         tabs.add(createTab("Tarjeta", TarjetaView.class));
         tabs.add(createTab("Tarjetas", TarjetasView.class));
