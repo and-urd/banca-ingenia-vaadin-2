@@ -10,9 +10,11 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
+import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -74,9 +76,12 @@ public class MainView extends AppLayout {
         viewTitle = new H1();
         
         layout.add(viewTitle);
- 
-        //layout.add(new Avatar());
-        layout.add(createAvatarMenu());
+
+        //Añadimos la inicial del nombre del usuario dentro del avatar
+        layout.add(new Avatar(SecurityConfiguration.getUserDetails().getUsername()));
+
+        //Creamos un menu con el nombre completo del usuario y con opcion de Logout
+        layout.add(createProfileMenu());
         
         return layout;
     }
@@ -136,24 +141,35 @@ public class MainView extends AppLayout {
         return tab;
     }
 
-    private Component createAvatarMenu() {    	
-    	// get security context    	
-    	Avatar avatar = new Avatar();    	
-    	avatar.setName(SecurityConfiguration.getUserDetails().getUsername());
-    	
-    	ContextMenu contextMenu = new ContextMenu();
-    	contextMenu.setOpenOnClick(true);
-    	contextMenu.setTarget(avatar);
-    	
-    	contextMenu.addItem("Profile", e -> {    	        	
-    	});
+//    private Component createAvatarMenu() {
+//    	// get security context
+//    	Avatar avatar = new Avatar();
+//    	avatar.setName(SecurityConfiguration.getUserDetails().getUsername());
+//
+//    	ContextMenu contextMenu = new ContextMenu();
+//    	contextMenu.setOpenOnClick(true);
+//    	contextMenu.setTarget(avatar);
+//
+//    	contextMenu.addItem("Profile", e -> {
+//    	});
+//
+//    	contextMenu.addItem("Logout", e -> {
+//    		contextMenu.getUI().ifPresent(ui -> ui.getPage().setLocation("/logout"));
+//    	});
+//
+//    	return avatar;
+//    }
 
-    	contextMenu.addItem("Logout", e -> {
-    		contextMenu.getUI().ifPresent(ui -> ui.getPage().setLocation("/logout"));
-    	});
-    	
-    	return avatar;
+    private Component createProfileMenu(){
+        MenuBar menuBarProfile = new MenuBar();
+        MenuItem menuItemProfile = menuBarProfile.addItem(SecurityConfiguration.getUserDetails().getUsername());
+        menuItemProfile.getSubMenu().addItem("Logout", e ->{
+            menuItemProfile.getUI().ifPresent(ui -> ui.getPage().setLocation("/logout"));
+        });
+//        menuBarProfile.setOpenOnHover(true);
+        return menuBarProfile;
     }
+
     
     @Override
     protected void afterNavigation() {

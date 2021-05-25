@@ -32,13 +32,12 @@ public class CuentaServiceImpl implements CuentaService {
         this.movimientoRepository = movimientoRepository;
     }
 
+
     // Devuelve una cuenta por ID
     @Override
     public Optional<Cuenta> recuperarCuentaPorId(Long id) {
         return cuentaRepository.findById(id);
     }
-
-
 
 
     // Devuelve las cuentas de un usuario por su id
@@ -137,6 +136,11 @@ public class CuentaServiceImpl implements CuentaService {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public List<Cuenta> findAll() {
+         return cuentaRepository.findAll();
     }
 
 //    @Override

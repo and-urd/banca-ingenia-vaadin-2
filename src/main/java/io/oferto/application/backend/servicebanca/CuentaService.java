@@ -24,6 +24,8 @@ public interface CuentaService {
     // Crea una cuenta
     Cuenta crearCuenta(Cuenta cuenta);
 
+    List<Cuenta> findAll();
+
     // Crea una cuenta completa
 //    Cuenta creaCuentaCompleta(Cuenta cuenta, Usuario usuario,  Tarjeta tarjeta, Movimiento movimiento);
 
