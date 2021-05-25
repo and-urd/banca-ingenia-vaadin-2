@@ -4,6 +4,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.DataProvider;
@@ -25,7 +26,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @Route(value = "tarjetas", layout = MainView.class)
-@PageTitle("Tarjetas")
+@PageTitle("Bienvenido/a a la banca")
 public class TarjetasView extends VerticalLayout {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -73,7 +74,7 @@ public class TarjetasView extends VerticalLayout {
         configureGrid();
 
         // create view layput
-        add(gridTarjeta);
+        add(createTitle(), gridTarjeta);
 
     }
 
@@ -178,8 +179,8 @@ public class TarjetasView extends VerticalLayout {
 //        return button;
 //    }
 
-
-
-
+    private Component createTitle() {
+        return new H3("Tarjetas");
+    }
 
 }

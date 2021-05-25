@@ -10,7 +10,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route(value = "login")
-@PageTitle("Login | Vaadin Training")
+@PageTitle("Login | Ingenia Bank")
 @CssImport("./views/login/login-view.css")
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 	LoginForm loginForm = new LoginForm();	
@@ -22,7 +22,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		loginForm.setForgotPasswordButtonVisible(false);	
 		loginForm.setAction("login");
 
-		add(new H1("Vaadin Stock Manager"), loginForm);
+		add(new H1("Ingenia Bank"), loginForm);
 	}
 		
     @Override
