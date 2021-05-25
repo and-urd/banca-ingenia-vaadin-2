@@ -11,6 +11,7 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.contextmenu.MenuItem;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
@@ -68,7 +69,7 @@ public class MainView extends AppLayout {
         HorizontalLayout layout = new HorizontalLayout();
         
         layout.setId("header");
-        layout.getThemeList().set("dark", true);
+//        layout.getThemeList().set("dark", true);
         layout.setWidthFull();
         layout.setSpacing(false);
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -97,11 +98,14 @@ public class MainView extends AppLayout {
         layout.setAlignItems(FlexComponent.Alignment.STRETCH);
         
         HorizontalLayout logoLayout = new HorizontalLayout();
-        
+
         logoLayout.setId("logo");
         logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
-        logoLayout.add(new Image("images/logo.png", "stock-manager logo"));
-        logoLayout.add(new H2("Stock Manager"));
+
+        Image logo = new Image("images/Captura.PNG", "Banca Ingenia");
+
+
+        logoLayout.add(new H3("Ingenia Bank"), logo);
         layout.add(logoLayout, menu);
         
         return layout;
@@ -122,13 +126,15 @@ public class MainView extends AppLayout {
     	List<Tab> tabs = new ArrayList<Tab>();
     	
 //    	tabs.add(createTab("Dashboard", DashboardView.class));
-    	if (SecurityConfiguration.isAdmin())
-    		tabs.add(createTab("Warehouse", WarehouseView.class));
-    	tabs.add(createTab("Product Master", ProductView.class));
-    	tabs.add(createTab("Stock List", StockView.class));
+//    	if (SecurityConfiguration.isAdmin())
+//    	    tabs.add(createTab("Warehouse", WarehouseView.class));
+//
+//    	tabs.add(createTab("Product Master", ProductView.class));
+//    	tabs.add(createTab("Stock List", StockView.class));
+//    	tabs.add(createTab("Categoria", CategoriaView.class));
+//      tabs.add(createTab("Tarjeta", TarjetaView.class));
+
         tabs.add(createTab("Inicio", InicioView.class));
-    	tabs.add(createTab("Categoria", CategoriaView.class));
-        tabs.add(createTab("Tarjeta", TarjetaView.class));
         tabs.add(createTab("Tarjetas", TarjetasView.class));
         tabs.add(createTab("Cuentas", CuentasView.class));
         tabs.add(createTab("Movimientos", MovimientosView.class));
