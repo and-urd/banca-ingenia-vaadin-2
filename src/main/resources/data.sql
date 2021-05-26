@@ -35,9 +35,9 @@ INSERT INTO cuentas_users (cuenta_id,user_id) VALUES
 
 -- TARJETAS --
 INSERT INTO tarjetas (cvv,fecha_caducidad,limite_maximo,numero_tarjeta,tipo_tarjeta,id_cuenta) VALUES
-	 (356,'2022-05-16',500.0,'15165165','Debito',1),
-	 (586,'2022-05-13',300.0,'56161665','Debito',1),
-	 (834,'2022-03-03',500.0,'23432433','Credito',2),
+	 (356,'2022-05-16',500.0,'15165165','Débito',1),
+	 (586,'2022-05-13',300.0,'56161665','Débito',1),
+	 (834,'2022-03-03',500.0,'23432433','Crédito',2),
 	 (443,'2022-01-29',500.0,'89789873','Débito',3),
 	 (220,'2022-03-10',600.0,'43027100','Crédito',5),
 	 (117,'2022-11-24',1000.0,'21210741','Débito',3),
