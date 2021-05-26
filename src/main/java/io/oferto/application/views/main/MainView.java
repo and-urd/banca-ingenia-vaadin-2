@@ -146,7 +146,6 @@ public class MainView extends AppLayout {
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
         final Tab tab = new Tab();
 
-        // todo -- poner iconos correspondientes
 
         Icon icono;
         switch (text){
@@ -167,7 +166,7 @@ public class MainView extends AppLayout {
         }
 
 
-        tab.add(icono/*new Icon(VaadinIcon.USERS),*/, new RouterLink(text, navigationTarget));
+        tab.add(icono, new RouterLink(text, navigationTarget));
         ComponentUtil.setData(tab, Class.class, navigationTarget);
         return tab;
     }
