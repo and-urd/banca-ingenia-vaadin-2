@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @Route(value = "tarjetas", layout = MainView.class)
-@PageTitle("Bienvenido/a a la banca")
+@PageTitle("Bienvenido/a a tu banca")
 public class TarjetasView extends VerticalLayout {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
