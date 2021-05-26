@@ -48,7 +48,8 @@ public class PanelMovimientosInicio extends HorizontalLayout {
     private List<Movimiento> movimientosReducidos(){
         this.movimientoList = movimientoService.recuperaTodosMovimientos();
         List<Movimiento> movimientoResultado = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        int limiteMax = 10;
+        for (int i = movimientoList.size() - limiteMax; i < movimientoList.size(); i++) {
             movimientoResultado.add(movimientoList.get(i));
         }
         return movimientoResultado;
