@@ -147,7 +147,27 @@ public class MainView extends AppLayout {
         final Tab tab = new Tab();
 
         // todo -- poner iconos correspondientes
-        tab.add(/*new Icon(VaadinIcon.USERS),*/ new RouterLink(text, navigationTarget));
+
+        Icon icono;
+        switch (text){
+            case "Inicio":
+                icono = new Icon(VaadinIcon.HOME_O);
+                break;
+            case "Tarjetas":
+                icono = new Icon(VaadinIcon.CREDIT_CARD);
+                break;
+            case "Cuentas":
+                icono = new Icon(VaadinIcon.USERS);
+                break;
+            case "Movimientos":
+                icono = new Icon(VaadinIcon.EXCHANGE);
+                break;
+            default:
+                icono = new Icon();
+        }
+
+
+        tab.add(icono/*new Icon(VaadinIcon.USERS),*/, new RouterLink(text, navigationTarget));
         ComponentUtil.setData(tab, Class.class, navigationTarget);
         return tab;
     }
