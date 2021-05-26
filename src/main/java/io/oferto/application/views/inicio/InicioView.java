@@ -30,15 +30,15 @@ public class InicioView extends VerticalLayout {
 
         PanelTarjetasInicio panelTarjetasInicio = new PanelTarjetasInicio(movimientoService, this.tarjetaService);
         PanelMovimientosInicio panelMovimientosInicio = new PanelMovimientosInicio(movimientoService);
-        PanelTarjetasInicio panelTarjetasInicio = new PanelTarjetasInicio();
 
+        //createPanelTarjetaLayout()
         add(panelTarjetasInicio);
         createPanelMovimientoLayout();
         add(panelMovimientosInicio);
     }
 
     private void createPanelMovimientoLayout(){
-        toolBarLayout = new HorizontalLayout();
+        HorizontalLayout toolBarLayout = new HorizontalLayout();
         toolBarLayout.setWidthFull();
 
         H3 h3Movimientos = new H3("Movimientos");
