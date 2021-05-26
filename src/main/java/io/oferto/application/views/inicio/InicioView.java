@@ -9,9 +9,12 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.router.RouterLink;
 import io.oferto.application.backend.servicebanca.MovimientoService;
 import io.oferto.application.backend.servicebanca.TarjetaService;
 import io.oferto.application.views.main.MainView;
+import io.oferto.application.views.movimientos.MovimientosView;
+import io.oferto.application.views.tarjetas.TarjetasView;
 
 @RouteAlias(value = "", layout = MainView.class)
 @Route(value = "inicio", layout = MainView.class)
@@ -44,14 +47,10 @@ public class InicioView extends VerticalLayout {
         H3 h3Movimientos = new H3("Movimientos");
         h3Movimientos.getElement().getStyle().set("margin-right", "auto");
 
-        NativeButton button = new NativeButton(
-                "Ver Más");
-        button.addClickListener(e ->
-                button.getUI().ifPresent(ui ->
-                        ui.navigate("movimientos"))
-        );
+        RouterLink routerLink = new RouterLink("Ver más", MovimientosView.class);
+//        routerLink.getElement().getStyle().set("margin-top", "auto");
 
-        toolBarLayout.add(h3Movimientos, button);
+        toolBarLayout.add(h3Movimientos, routerLink);
         add(toolBarLayout);
     }
 

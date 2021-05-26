@@ -16,6 +16,7 @@ import io.oferto.application.backend.modelbanca.Movimiento;
 import io.oferto.application.backend.servicebanca.MovimientoService;
 import io.oferto.application.views.main.MainView;
 import io.oferto.application.views.tarjetas.TarjetasView;
+import org.vaadin.klaudeta.PaginatedGrid;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ import java.util.List;
 public class MovimientosView extends VerticalLayout {
 
     private MovimientoService movimientoService;
-    private Grid<Movimiento> movimientoGrid = new Grid<>(Movimiento.class);
+    private PaginatedGrid<Movimiento> movimientoGrid = new PaginatedGrid<>(Movimiento.class);
     private List<Movimiento> movimientoList;
     private ListDataProvider<Movimiento>movimientoListDataProvider;
 
@@ -78,6 +79,10 @@ public class MovimientosView extends VerticalLayout {
         movimientoGrid.addColumn(Movimiento::getCantidad).setHeader("Cantidad").setSortable(true);
         movimientoGrid.addColumn(Movimiento::getConcepto).setHeader("Concepto").setSortable(true);
         movimientoGrid.addColumn(Movimiento::getFechaOperacion).setHeader("Fecha").setSortable(true);
+
+        //Paginator
+        movimientoGrid.setPageSize(15);
+        movimientoGrid.setPaginatorSize(5);
 
         movimientoGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER,
                 GridVariant.LUMO_NO_ROW_BORDERS,
