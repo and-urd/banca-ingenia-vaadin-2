@@ -1,20 +1,16 @@
 package io.oferto.application.views.main;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
-import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.contextmenu.MenuItem;
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.menubar.MenuBar;
@@ -24,26 +20,20 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
-
 import io.oferto.application.security.SecurityConfiguration;
-import io.oferto.application.views.categoria.CategoriaView;
 import io.oferto.application.views.cuentas.CuentasView;
-//import io.oferto.application.views.dashboard.DashboardView;
 import io.oferto.application.views.inicio.InicioView;
 import io.oferto.application.views.movimientos.MovimientosView;
-import io.oferto.application.views.product.ProductView;
-import io.oferto.application.views.stock.StockView;
-import io.oferto.application.views.tarjeta.TarjetaView;
 import io.oferto.application.views.tarjetas.TarjetasView;
-import io.oferto.application.views.warehouse.WarehouseView;
 
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.dependency.CssImport;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -126,16 +116,6 @@ public class MainView extends AppLayout {
 
     private Component[] createMenuItems() {    	    	
     	List<Tab> tabs = new ArrayList<Tab>();
-    	
-//    	tabs.add(createTab("Dashboard", DashboardView.class));
-//    	if (SecurityConfiguration.isAdmin())
-//    	    tabs.add(createTab("Warehouse", WarehouseView.class));
-//
-//    	tabs.add(createTab("Product Master", ProductView.class));
-//    	tabs.add(createTab("Stock List", StockView.class));
-//    	tabs.add(createTab("Categoria", CategoriaView.class));
-//      tabs.add(createTab("Tarjeta", TarjetaView.class));
-
         tabs.add(createTab("Inicio", InicioView.class));
         tabs.add(createTab("Tarjetas", TarjetasView.class));
         tabs.add(createTab("Cuentas", CuentasView.class));
@@ -171,25 +151,9 @@ public class MainView extends AppLayout {
         return tab;
     }
 
-//    private Component createAvatarMenu() {
-//    	// get security context
-//    	Avatar avatar = new Avatar();
-//    	avatar.setName(SecurityConfiguration.getUserDetails().getUsername());
-//
-//    	ContextMenu contextMenu = new ContextMenu();
-//    	contextMenu.setOpenOnClick(true);
-//    	contextMenu.setTarget(avatar);
-//
-//    	contextMenu.addItem("Profile", e -> {
-//    	});
-//
-//    	contextMenu.addItem("Logout", e -> {
-//    		contextMenu.getUI().ifPresent(ui -> ui.getPage().setLocation("/logout"));
-//    	});
-//
-//    	return avatar;
-//    }
-
+    /*
+    Create un menu con el nombre del usuario y un submenu con opcion de Logout
+     */
     private Component createProfileMenu(){
         MenuBar menuBarProfile = new MenuBar();
         MenuItem menuItemProfile = menuBarProfile.addItem(SecurityConfiguration.getUserDetails().getUsername());

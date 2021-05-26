@@ -45,18 +45,6 @@ INSERT INTO tarjetas (cvv,fecha_caducidad,limite_maximo,numero_tarjeta,tipo_tarj
 	 (992,'2022-10-02',500.0,'74210723','Débito',4),
 	 (992,'2022-10-02',500.0,'94270041','Débito',4);
 
--- CATEGORIAS --
-INSERT INTO categorias (tipo_categoria) VALUES
-	 ('Restaurantes'),
-	 ('Combustible'),
-	 ('Viajes'),
-	 ('Hoteles'),
-	 ('Compras'),
-	 ('Regalos'),
-	 ('Varios'),
-	 ('Domiciliacion'),
-	 ('Electrónica');
-
 -- MOVIMIENTOS --
 	 INSERT INTO training2.movimientos (cantidad,concepto,fecha_operacion,fecha_valor,num_tarjeta,saldo_actual,id_categoria,id_cuenta) VALUES
      	 (50.0,'ingreso','2021-05-01','2021-05-01','',50.0,1,1),
