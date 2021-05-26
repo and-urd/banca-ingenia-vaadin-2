@@ -81,7 +81,7 @@ public class MovimientosView extends VerticalLayout {
         movimientoGrid.addColumn(Movimiento::getFechaOperacion).setHeader("Fecha").setSortable(true);
 
         //Paginator
-        movimientoGrid.setPageSize(15);
+        movimientoGrid.setPageSize(10);
         movimientoGrid.setPaginatorSize(5);
 
         movimientoGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER,
