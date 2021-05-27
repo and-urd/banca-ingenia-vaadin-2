@@ -42,8 +42,8 @@ public class InicioView extends VerticalLayout {
 
     private void createPanelMovimientoLayout(){
         HorizontalLayout toolBarLayout = new HorizontalLayout();
-        toolBarLayout.setWidthFull();
-
+//        toolBarLayout.setWidthFull();
+        toolBarLayout.setWidth("1000px");
         H3 h3Movimientos = new H3("Movimientos");
         h3Movimientos.getElement().getStyle().set("margin-right", "auto");
 

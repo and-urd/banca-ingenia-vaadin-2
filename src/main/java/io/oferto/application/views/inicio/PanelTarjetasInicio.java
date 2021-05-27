@@ -28,7 +28,8 @@ public class PanelTarjetasInicio extends VerticalLayout {
         this.setPadding(false);
 
         HorizontalLayout layoutHorCabecera = new HorizontalLayout();
-        layoutHorCabecera.setWidthFull();
+//        layoutHorCabecera.setWidthFull();
+        layoutHorCabecera.setWidth("1000px");
         layoutHorCabecera.setPadding(false);
 
         H3 titulo = new H3("Tarjetas");
@@ -45,6 +46,7 @@ public class PanelTarjetasInicio extends VerticalLayout {
         this.add(layoutHorCabecera);
 
         HorizontalLayout layoutCards = new HorizontalLayout();
+        layoutCards.setWidth("1000px");
         layoutCards.setPadding(false);
 
         List<Tarjeta> listadoTarjetas = tarjetaService.encuentraTarjetas();

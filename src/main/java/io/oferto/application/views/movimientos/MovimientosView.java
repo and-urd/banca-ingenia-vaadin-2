@@ -30,7 +30,8 @@ public class MovimientosView extends VerticalLayout {
     private ListDataProvider<Movimiento>movimientoListDataProvider;
 
     public MovimientosView(MovimientoService movimientoService){
-        this.setSizeFull();
+//        this.setSizeFull();
+        this.setWidth("1000px");
         this.setPadding(true);
 
         this.movimientoService = movimientoService;
@@ -59,7 +60,8 @@ public class MovimientosView extends VerticalLayout {
 
     private void configureGrid(){
         loadGrid();
-        movimientoGrid.setSizeFull();
+//        movimientoGrid.setSizeFull();
+        movimientoGrid.setWidth("1000px");
 
         movimientoGrid.setColumns("numTarjeta");
         movimientoGrid.getColumnByKey("numTarjeta").setHeader("Nº Tarjeta").setVisible(false);

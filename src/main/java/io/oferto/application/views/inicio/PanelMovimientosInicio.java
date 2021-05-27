@@ -26,8 +26,10 @@ public class PanelMovimientosInicio extends HorizontalLayout {
     private ListDataProvider<Movimiento> movimientoListDataProvider;
 
     public PanelMovimientosInicio(MovimientoService movimientoService) {
-        this.setSizeFull();
-        this.setPadding(true);
+//        this.setSizeFull();
+        this.setWidth("1000px");
+        this.setPadding(false);
+        this.setMargin(false);
 
         this.movimientoService = movimientoService;
 
@@ -48,7 +50,7 @@ public class PanelMovimientosInicio extends HorizontalLayout {
     private List<Movimiento> movimientosReducidos(){
         this.movimientoList = movimientoService.recuperaTodosMovimientos();
         List<Movimiento> movimientoResultado = new ArrayList<>();
-        int limiteMax = 10;
+        int limiteMax = 9;
         for (int i = movimientoList.size() - limiteMax; i < movimientoList.size(); i++) {
             movimientoResultado.add(movimientoList.get(i));
         }
@@ -65,8 +67,8 @@ public class PanelMovimientosInicio extends HorizontalLayout {
 
     private void configureGrid(){
         loadGrid();
-        movimientoGrid.setSizeFull();
-
+//        movimientoGrid.setSizeFull();
+        movimientoGrid.setWidth("1000px");
         movimientoGrid.setColumns("numTarjeta");
         movimientoGrid.getColumnByKey("numTarjeta").setHeader("Nº Tarjeta").setVisible(false);
 

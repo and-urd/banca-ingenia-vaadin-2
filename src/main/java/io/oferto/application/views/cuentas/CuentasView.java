@@ -29,7 +29,8 @@ public class CuentasView extends VerticalLayout {
     private ListDataProvider<Cuenta>cuentaListDataProvider;
 
     public CuentasView(CuentaService cuentaService){
-        this.setSizeFull();
+//        this.setSizeFull();
+        this.setWidth("1000px");
         this.setPadding(true);
 
         this.cuentaService=cuentaService;
@@ -57,8 +58,8 @@ public class CuentasView extends VerticalLayout {
 
     private void configureGrid(){
         loadGrid();
-        cuentaGrid.setSizeFull();
-
+//        cuentaGrid.setSizeFull();
+        cuentaGrid.setWidth("1000px");
         cuentaGrid.setColumns("numeroCuenta");
         cuentaGrid.getColumnByKey("numeroCuenta").setHeader("Nº Cuenta").setVisible(false);
 

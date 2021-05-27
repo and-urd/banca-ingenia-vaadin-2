@@ -48,7 +48,8 @@ public class TarjetasView extends VerticalLayout {
 
 
 //        addClassName("about-view");
-        setSizeFull();
+//        setSizeFull();
+        this.setWidth("1000px");
         setPadding(true);
 
 
@@ -102,18 +103,19 @@ public class TarjetasView extends VerticalLayout {
     private void configureGrid() {
         loadGrid();
 
-        gridTarjeta.setSizeFull();
+//        gridTarjeta.setSizeFull();
+        gridTarjeta.setWidth("1000px");
 
 
         gridTarjeta.setColumns("numeroTarjeta");
-        gridTarjeta.getColumnByKey("numeroTarjeta").setFlexGrow(0).setWidth("200px").setHeader("Numero tarjeta").setVisible(false);
+        gridTarjeta.getColumnByKey("numeroTarjeta").setHeader("Numero tarjeta").setVisible(false);
 
-        gridTarjeta.addColumn(tarjeta -> tarjetaUltimosDigitos(tarjeta.getNumeroTarjeta())).setFlexGrow(0).setWidth("200px").setHeader("Número tarjeta").setSortable(true);
-        gridTarjeta.addColumn(item -> saldoPorTarjeta(gridTarjeta, item)).setFlexGrow(0).setWidth("200px").setHeader("Gasto Tarjeta").setSortable(true);
-        gridTarjeta.addColumn(Tarjeta::getTipoTarjeta).setFlexGrow(0).setWidth("200px").setHeader("Tipo tarjeta").setSortable(true);
-        gridTarjeta.addColumn(Tarjeta::getLimiteMaximo).setFlexGrow(0).setWidth("200px").setHeader("Límite máximo").setSortable(true);
-        gridTarjeta.addColumn(tarjeta -> tarjeta.getCuenta().getNumeroCuenta()).setFlexGrow(0).setWidth("200px").setHeader("Número cuenta").setSortable(true);
-        gridTarjeta.addColumn(tarjeta -> tarjeta.getCuenta().getEntidad()).setFlexGrow(0).setWidth("200px").setHeader("Entidad bancaria").setSortable(true);
+        gridTarjeta.addColumn(tarjeta -> tarjetaUltimosDigitos(tarjeta.getNumeroTarjeta())).setHeader("Número tarjeta").setSortable(true);
+        gridTarjeta.addColumn(item -> saldoPorTarjeta(gridTarjeta, item)).setHeader("Gasto Tarjeta").setSortable(true);
+        gridTarjeta.addColumn(Tarjeta::getTipoTarjeta).setHeader("Tipo tarjeta").setSortable(true);
+        gridTarjeta.addColumn(Tarjeta::getLimiteMaximo).setHeader("Límite máximo").setSortable(true);
+        gridTarjeta.addColumn(tarjeta -> tarjeta.getCuenta().getNumeroCuenta()).setHeader("Número cuenta").setSortable(true);
+        gridTarjeta.addColumn(tarjeta -> tarjeta.getCuenta().getEntidad()).setHeader("Entidad bancaria").setSortable(true);
 
 
 //        gridTarjeta.getColumnByKey("tipoTarjeta").setFlexGrow(0).setWidth("200px").setHeader("Tipo tarjeta");
