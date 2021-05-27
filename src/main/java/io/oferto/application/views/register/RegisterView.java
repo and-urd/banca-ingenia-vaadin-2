@@ -11,8 +11,17 @@ import com.vaadin.flow.router.Route;
 //TODO
 @Route(value = "register")
 @PageTitle("Register | Ingenia Bank")
-public class RegisterView extends VerticalLayout implements BeforeEnterObserver {
-    LoginForm registerForm = new LoginForm();
+public class RegisterView extends VerticalLayout/* implements BeforeEnterObserver*/ {
+
+    public RegisterView(){
+        this.setSizeFull();
+        this.setPadding(true);
+
+        H1 h1 = new H1("Página registro");
+    }
+
+
+    /*LoginForm registerForm = new LoginForm();
 
     public RegisterView() {
         setJustifyContentMode(JustifyContentMode.CENTER);
@@ -33,4 +42,6 @@ public class RegisterView extends VerticalLayout implements BeforeEnterObserver 
             registerForm.setError(true);
         }
     }
+*/
+
 }

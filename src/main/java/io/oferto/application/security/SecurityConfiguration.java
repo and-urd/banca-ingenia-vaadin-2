@@ -1,5 +1,7 @@
 package io.oferto.application.security;
 
+import io.oferto.application.backend.modelbanca.Usuario;
+import io.oferto.application.backend.servicebanca.UserService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +22,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private static final String LOGOUT_SUCCESS_URL = "/login";
 
 	private static UserDetails userDetails;
-	
+
+	private final UserService userService;
+
+	public SecurityConfiguration(UserService userService) {
+		this.userService = userService;
+	}
+
 	/**
 	 * Require login to access internal pages and configure login form.
 	 */
@@ -40,6 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
 
 				// Allow all requests by logged in users.
+				.antMatchers("/register/*").permitAll()
 				.anyRequest().authenticated()
 
 				// Configure the login page.
@@ -54,9 +63,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-            .withUser("admin").password("{noop}password").roles("ADMIN").and()
-            .withUser("operator").password("{noop}password").roles("USER");
+//        auth.inMemoryAuthentication()
+//            .withUser("admin").password("{noop}password").roles("ADMIN").and()
+//            .withUser("operator").password("{noop}password").roles("USER");
+
+		for (Usuario usuario : userService.encotrarTodosUsuarios()) {
+			auth.inMemoryAuthentication()
+					.withUser(usuario.getUsername()).password(usuario.getPassword()).roles("ADMIN");
+
+		}
+
+
+
     }
 	
 	public static boolean isAdmin() {

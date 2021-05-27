@@ -4,10 +4,8 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.*;
+import io.oferto.application.views.register.RegisterView;
 
 @Route(value = "login")
 @PageTitle("Login | Ingenia Bank")
@@ -22,7 +20,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		loginForm.setForgotPasswordButtonVisible(false);	
 		loginForm.setAction("login");
 
-		add(new H1("Ingenia Bank"), loginForm);
+		add(new RouterLink("Registro", RegisterView.class), new H1("Ingenia Bank"), loginForm);
 	}
 		
     @Override

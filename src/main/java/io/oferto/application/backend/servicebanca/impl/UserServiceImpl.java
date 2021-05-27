@@ -6,6 +6,8 @@ import io.oferto.application.backend.repositorybanca.UserRepository;
 import io.oferto.application.backend.servicebanca.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -27,5 +29,10 @@ public class UserServiceImpl implements UserService {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public List<Usuario> encotrarTodosUsuarios() {
+        return userRepository.findAll();
     }
 }
