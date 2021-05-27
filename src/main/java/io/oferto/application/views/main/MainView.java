@@ -94,11 +94,12 @@ public class MainView extends AppLayout {
         logoLayout.setId("logo");
         logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
 
-        Image logo = new Image("images/Captura.PNG", "Banca Ingenia");
+        Image logo = new Image("images/logo-banca-ingenia.PNG", "Banca Ingenia");
+        logo.setHeight("50px");
+        logo.setWidth("50px");
 
-
-        logoLayout.add(new H3("Ingenia Bank"), logo);
-        layout.add(logoLayout, menu);
+        logoLayout.add(logo, new H3("Ingenia Bank"));
+        layout.add(  logoLayout, menu);
         
         return layout;
     }
