@@ -16,7 +16,7 @@ import io.oferto.application.views.main.MainView;
 import io.oferto.application.views.movimientos.MovimientosView;
 import io.oferto.application.views.tarjetas.TarjetasView;
 
-@RouteAlias(value = "", layout = MainView.class)
+//@RouteAlias(value = "", layout = MainView.class)
 @Route(value = "inicio", layout = MainView.class)
 @PageTitle("Bienvenido/a a tu banca")
 public class InicioView extends VerticalLayout {
