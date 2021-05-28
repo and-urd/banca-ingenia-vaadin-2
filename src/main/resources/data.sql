@@ -20,10 +20,10 @@ INSERT INTO cuentas (entidad,numero_cuenta,saldo,tipo_cuenta) VALUES
 	 ('UNICAJA','4901749274',12000.0,'Corriente');
 
 -- USUARIOS --
-INSERT INTO usuarios (direccion,email,password,telefono,username) VALUES
-	 ('Calle Falsa 123 Malaga','rafa@email.com','{noop}password','654123987','admin'),
-	 ('Calle Loquesea 268 Malaga','andres@email.com','{noop}password','665165187','operator'),
-	 ('Calle Flores 2 Malaga','joaquin@email.com','{noop}1234','665342211','andres');
+INSERT INTO usuarios (direccion,email,password,telefono,username, active) VALUES
+	 ('Calle Falsa 123 Malaga','rafa@email.com','{noop}password','654123987','admin', 0),
+	 ('Calle Loquesea 268 Malaga','andres@email.com','{noop}password','665165187','operator', 0),
+	 ('Calle Flores 2 Malaga','joaquin@email.com','{noop}1234','665342211','andres', 0);
 
 
 -- CUENTAS-USUARIOS --

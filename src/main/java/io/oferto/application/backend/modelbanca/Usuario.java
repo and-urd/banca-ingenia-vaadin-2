@@ -3,6 +3,8 @@ package io.oferto.application.backend.modelbanca;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,17 +30,34 @@ public class Usuario {
 
 
 
+
+    private String passwordSalt;
+    private String passwordHash;
+    private Role role;
+    private String activationCode;
+    private boolean active;
+
+
+
     @JsonIgnore
     @ManyToMany (mappedBy = "users")
     private List<Cuenta> cuentas = new ArrayList<>();
 
+
+    // Constructores
     public Usuario() {
     }
-
     public Usuario(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+    public Usuario(String username, String password, Role role) {
+        this.username = username;
+        this.role = role;
+        this.passwordSalt = RandomStringUtils.random(32);
+        this.passwordHash = DigestUtils.sha1Hex(password + passwordSalt);
+        this.activationCode = RandomStringUtils.randomAlphanumeric(32);
     }
 
     public Long getId() {
@@ -87,5 +106,62 @@ public class Usuario {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+
+
+    public boolean checkPassword(String password) {
+        return DigestUtils.sha1Hex(password + passwordSalt).equals(passwordHash);
+    }
+
+
+
+
+    public String getPasswordSalt() {
+        return passwordSalt;
+    }
+
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public List<Cuenta> getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(List<Cuenta> cuentas) {
+        this.cuentas = cuentas;
     }
 }

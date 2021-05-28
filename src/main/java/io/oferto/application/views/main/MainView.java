@@ -2,6 +2,7 @@ package io.oferto.application.views.main;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
@@ -23,9 +24,12 @@ import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 //import io.oferto.application.security.SecurityConfiguration;
+import io.oferto.application.backend.modelbanca.Usuario;
+import io.oferto.application.backend.serviceAlejandro.AuthService;
 import io.oferto.application.views.cuentas.CuentasView;
 import io.oferto.application.views.inicio.InicioView;
 import io.oferto.application.views.movimientos.MovimientosView;
@@ -49,7 +53,10 @@ public class MainView extends AppLayout {
     private final Tabs menu;
     private H1 viewTitle;
 
-    public MainView() {
+    private final AuthService authService;
+    public MainView(AuthService authService) {
+        this.authService = authService;
+
         setPrimarySection(Section.DRAWER);
                   
         addToNavbar(true, createHeaderContent());
@@ -72,7 +79,7 @@ public class MainView extends AppLayout {
         layout.add(viewTitle);
 
         //Añadimos la inicial del nombre del usuario dentro del avatar
-        layout.add(new Avatar("Andres"));
+        layout.add(new Avatar());
 
         //Creamos un menu con el nombre completo del usuario y con opcion de Logout
         layout.add(createProfileMenu());
@@ -157,15 +164,26 @@ public class MainView extends AppLayout {
      */
     private Component createProfileMenu(){
         MenuBar menuBarProfile = new MenuBar();
-        MenuItem menuItemProfile = menuBarProfile.addItem("Andres");
+
+        Usuario usuarioLog = authService.recuperaUsuarioLogeado();
+
+
+        MenuItem menuItemProfile = menuBarProfile.addItem(usuarioLog.getUsername());
         menuItemProfile.getSubMenu().addItem("Logout", e ->{
-            menuItemProfile.getUI().ifPresent(ui -> ui.getPage().setLocation("/login"));
+            funcionLogout();
+//            menuItemProfile.getUI().ifPresent(ui -> /*funcionLogout()ui.getPage().setLocation("/login")*/);
         });
 //        menuBarProfile.setOpenOnHover(true);
         return menuBarProfile;
     }
 
-    
+    private void funcionLogout() {
+        UI.getCurrent().getPage().setLocation("login");
+        VaadinSession.getCurrent().getSession().invalidate();
+        VaadinSession.getCurrent().close();
+    }
+
+
     @Override
     protected void afterNavigation() {
         super.afterNavigation();

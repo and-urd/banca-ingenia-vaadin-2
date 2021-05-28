@@ -57,7 +57,9 @@
     "@polymer/iron-iconset-svg": "^3.0.1",
     "lit-html": "^1.1.2",
     "@polymer/paper-icon-button": "^3.0.2",
-    "@polymer/paper-button": "^3.0.1"
+    "@polymer/paper-button": "^3.0.1",
+    "chance": "1.1.7",
+    "open": "^7.2.1"
   },
   "devDependencies": {
     "chokidar": "^3.5.0",
@@ -128,7 +130,9 @@
       "@polymer/iron-iconset-svg": "^3.0.1",
       "lit-html": "^1.1.2",
       "@polymer/paper-icon-button": "^3.0.2",
-      "@polymer/paper-button": "^3.0.1"
+      "@polymer/paper-button": "^3.0.1",
+      "chance": "1.1.7",
+      "open": "^7.2.1"
     },
     "devDependencies": {
       "webpack-babel-multi-target-plugin": "2.3.3",
@@ -143,6 +147,6 @@
       "ts-loader": "8.0.12",
       "typescript": "4.0.3"
     },
-    "hash": "8ab102b9b719459d16e88e7dafdd27140c1d36d305e18430fc79d4e7f4335a4c"
+    "hash": "5bd1fda1622695bf48d62aadc6e22464c67b33820ae20831bdbe64d488d0b49a"
   }
 }
