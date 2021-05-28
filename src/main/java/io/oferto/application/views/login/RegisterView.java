@@ -48,7 +48,7 @@ public class RegisterView extends Composite {
             Notification.show("Passwords don't match");
         } else {
             authService.register(username, password1);
-            Notification.show("Check your email.");
+            Notification.show("Ya puedes iniciar sesión");
         }
     }
 }

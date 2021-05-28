@@ -167,8 +167,12 @@ public class MainView extends AppLayout {
 
         Usuario usuarioLog = authService.recuperaUsuarioLogeado();
 
+        MenuItem menuItemProfile = null;
+        if (usuarioLog != null) {
+            menuItemProfile = menuBarProfile.addItem(usuarioLog.getUsername());
+        }
 
-        MenuItem menuItemProfile = menuBarProfile.addItem(usuarioLog.getUsername());
+            
         menuItemProfile.getSubMenu().addItem("Logout", e ->{
             funcionLogout();
 //            menuItemProfile.getUI().ifPresent(ui -> /*funcionLogout()ui.getPage().setLocation("/login")*/);
