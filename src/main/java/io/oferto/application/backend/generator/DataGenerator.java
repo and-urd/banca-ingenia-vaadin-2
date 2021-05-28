@@ -40,8 +40,8 @@ public class DataGenerator {
             personRepositoryGenerator.setData(Person::setOccupation, DataType.OCCUPATION);
             personRepository.saveAll(personRepositoryGenerator.create(100, seed));
 
-            userRepository.save(new Usuario("user", "u", Role.USER));
-            userRepository.save(new Usuario("admin", "a", Role.ADMIN));
+//            userRepository.save(new Usuario("user", "u", Role.USER));
+//            userRepository.save(new Usuario("admin", "a", Role.ADMIN));
 
             logger.info("Generated demo data");
         };

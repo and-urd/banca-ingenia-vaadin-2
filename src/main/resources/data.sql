@@ -20,10 +20,26 @@ INSERT INTO cuentas (entidad,numero_cuenta,saldo,tipo_cuenta) VALUES
 	 ('UNICAJA','4901749274',12000.0,'Corriente');
 
 -- USUARIOS --
-INSERT INTO usuarios (direccion,email,password,telefono,username, active) VALUES
-	 ('Calle Falsa 123 Malaga','rafa@email.com','{noop}password','654123987','admin', 0),
-	 ('Calle Loquesea 268 Malaga','andres@email.com','{noop}password','665165187','operator', 0),
-	 ('Calle Flores 2 Malaga','joaquin@email.com','{noop}1234','665342211','andres', 0);
+--INSERT INTO usuarios (direccion,email,password,telefono,username, active) VALUES
+--	 ('Calle Falsa 123 Malaga','rafa@email.com','{noop}password','654123987','administrador', 0),
+--	 ('Calle Loquesea 268 Malaga','andres@email.com','{noop}password','665165187','operator', 0),
+--	 ('Calle Flores 2 Malaga','joaquin@email.com','{noop}1234','665342211','andres', 0);
+
+
+
+
+INSERT INTO usuarios (activation_code,active,direccion,email,password,password_hash,password_salt,`role`,telefono,username) VALUES
+	 ('BEZ7104HEyeUElmmcA7haryEy1PrNG7w',0,NULL,NULL,NULL,'14afb45e0a83eb04426edbdf7fd9d083709e133b','𥕌𢠶ﷁ𖭨𣥷𪼪🠂𭋾ஔ䪪𭌇잡𪀚𑘈㻹撅搀䑵𨰟众맠',0,NULL,'user'),
+	 ('Z7ubteBnAmcEBHWrDFpF58YOAd8yv8VE',0,NULL,NULL,NULL,'0cdba6078e2f91627da574fd069ba98bb11b0c30','𪱛뗏𥢱𘄦𑌪𐐆𭗻䤽𩱋鏯멫剱𫉾滟𘂶⣿뉝𭳄𡡸﹩䓙',1,NULL,'admin');
+
+INSERT INTO usuarios ( activation_code, active, direccion, email, password, password_hash, password_salt, `role`, telefono, username) VALUES
+    ('ei7IO1mY8cAWpktJl0Po55xqW2Gm02aY', 0, NULL, NULL, NULL, '40525521ccf7b57f64856e277ef5ccd5a8224bc3', '蘒𩻵𠓏𑀝å𢍍𰌳葻𗳠坻𰵊𭸸𬌐ꀃ𡨇𗪚ꢖ𨼣𝀑', 0, NULL, 'operator');
+
+
+
+
+
+
 
 
 -- CUENTAS-USUARIOS --
