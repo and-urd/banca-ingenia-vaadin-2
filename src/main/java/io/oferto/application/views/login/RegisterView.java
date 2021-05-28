@@ -37,6 +37,7 @@ public class RegisterView extends VerticalLayout {
         HorizontalLayout layoutCabecera = new HorizontalLayout();
         layoutCabecera.setJustifyContentMode(JustifyContentMode.CENTER);
         layoutCabecera.getStyle().set("padding","30px");
+        layoutCabecera.getStyle().set("margin", "0px 0px");
 
         Image logotipo = new Image("images/logo-banca-ingenia.PNG", "Banca Ingenia");
         logotipo.setHeight("50px");
