@@ -25,7 +25,7 @@ import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
-import io.oferto.application.security.SecurityConfiguration;
+//import io.oferto.application.security.SecurityConfiguration;
 import io.oferto.application.views.cuentas.CuentasView;
 import io.oferto.application.views.inicio.InicioView;
 import io.oferto.application.views.movimientos.MovimientosView;
@@ -72,7 +72,7 @@ public class MainView extends AppLayout {
         layout.add(viewTitle);
 
         //Añadimos la inicial del nombre del usuario dentro del avatar
-        layout.add(new Avatar(SecurityConfiguration.getUserDetails().getUsername()));
+        layout.add(new Avatar("Andres"));
 
         //Creamos un menu con el nombre completo del usuario y con opcion de Logout
         layout.add(createProfileMenu());
@@ -157,9 +157,9 @@ public class MainView extends AppLayout {
      */
     private Component createProfileMenu(){
         MenuBar menuBarProfile = new MenuBar();
-        MenuItem menuItemProfile = menuBarProfile.addItem(SecurityConfiguration.getUserDetails().getUsername());
+        MenuItem menuItemProfile = menuBarProfile.addItem("Andres");
         menuItemProfile.getSubMenu().addItem("Logout", e ->{
-            menuItemProfile.getUI().ifPresent(ui -> ui.getPage().setLocation("/logout"));
+            menuItemProfile.getUI().ifPresent(ui -> ui.getPage().setLocation("/login"));
         });
 //        menuBarProfile.setOpenOnHover(true);
         return menuBarProfile;
