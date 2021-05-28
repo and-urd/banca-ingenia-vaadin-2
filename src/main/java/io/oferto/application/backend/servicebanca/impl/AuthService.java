@@ -1,4 +1,4 @@
-package io.oferto.application.backend.serviceAlejandro;
+package io.oferto.application.backend.servicebanca.impl;
 
 
 import com.vaadin.flow.component.Component;
@@ -7,12 +7,11 @@ import com.vaadin.flow.server.VaadinSession;
 import io.oferto.application.backend.modelbanca.Role;
 import io.oferto.application.backend.modelbanca.Usuario;
 import io.oferto.application.backend.repositorybanca.UserRepository;
-import io.oferto.application.views.admin.AdminView;
 import io.oferto.application.views.cuentas.CuentasView;
 
 import io.oferto.application.views.inicio.InicioView;
-import io.oferto.application.views.logout.LogoutView;
 
+import io.oferto.application.views.login.RegisterView;
 import io.oferto.application.views.main.MainView;
 import io.oferto.application.views.movimientos.MovimientosView;
 import io.oferto.application.views.tarjetas.TarjetasView;
@@ -68,16 +67,15 @@ public class AuthService {
 
         if (role.equals(Role.USER)) {
             routes.add(new AuthorizedRoute("inicio", "Inicio", InicioView.class));
-            routes.add(new AuthorizedRoute("logout", "Logout", LogoutView.class));
-
             routes.add(new AuthorizedRoute("cuentas", "Cuentas", CuentasView.class));
             routes.add(new AuthorizedRoute("tarjetas", "Tarjetas", TarjetasView.class));
             routes.add(new AuthorizedRoute("movimientos", "Movimientos", MovimientosView.class));
 
         } else if (role.equals(Role.ADMIN)) {
-//            routes.add(new AuthorizedRoute("home", "Home", HomeView.class));
-//            routes.add(new AuthorizedRoute("admin", "Admin", AdminView.class));
-//            routes.add(new AuthorizedRoute("logout", "Logout", LogoutView.class));
+            routes.add(new AuthorizedRoute("inicio", "Inicio", InicioView.class));
+            routes.add(new AuthorizedRoute("cuentas", "Cuentas", CuentasView.class));
+            routes.add(new AuthorizedRoute("tarjetas", "Tarjetas", TarjetasView.class));
+            routes.add(new AuthorizedRoute("movimientos", "Movimientos", MovimientosView.class));
         }
 
         return routes;

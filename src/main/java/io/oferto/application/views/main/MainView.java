@@ -29,7 +29,7 @@ import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 //import io.oferto.application.security.SecurityConfiguration;
 import io.oferto.application.backend.modelbanca.Usuario;
-import io.oferto.application.backend.serviceAlejandro.AuthService;
+import io.oferto.application.backend.servicebanca.impl.AuthService;
 import io.oferto.application.views.cuentas.CuentasView;
 import io.oferto.application.views.inicio.InicioView;
 import io.oferto.application.views.movimientos.MovimientosView;
