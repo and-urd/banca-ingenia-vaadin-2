@@ -2,6 +2,7 @@ package io.oferto.application.backend.servicebanca.impl;
 
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.server.VaadinSession;
 import io.oferto.application.backend.modelbanca.Role;
@@ -90,6 +91,8 @@ public class AuthService {
 //        message.setText(text);
 //        message.setTo(email);
 //        mailSender.send(message);
+
+        UI.getCurrent().navigate("login");
     }
 
     public void activate(String activationCode) throws AuthException {
