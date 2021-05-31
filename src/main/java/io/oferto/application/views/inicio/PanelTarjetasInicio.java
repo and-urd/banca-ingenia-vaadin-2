@@ -63,7 +63,7 @@ public class PanelTarjetasInicio extends VerticalLayout {
 
 
 
-        int numTarjetasAMostrar = 3;
+        int numTarjetasAMostrar = 4;
         for (int i = 0; i < numTarjetasAMostrar ; i++) {
 
             if(i >= listadoTarjetas.size()) break;
