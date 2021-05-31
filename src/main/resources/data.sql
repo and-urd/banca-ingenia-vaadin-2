@@ -28,12 +28,16 @@ INSERT INTO cuentas (entidad,numero_cuenta,saldo,tipo_cuenta) VALUES
 
 
 
-INSERT INTO usuarios (activation_code,active,direccion,email,password,password_hash,password_salt,`role`,telefono,username) VALUES
-	 ('BEZ7104HEyeUElmmcA7haryEy1PrNG7w',0,NULL,NULL,NULL,'14afb45e0a83eb04426edbdf7fd9d083709e133b','𥕌𢠶ﷁ𖭨𣥷𪼪🠂𭋾ஔ䪪𭌇잡𪀚𑘈㻹撅搀䑵𨰟众맠',0,NULL,'user'),
-	 ('Z7ubteBnAmcEBHWrDFpF58YOAd8yv8VE',0,NULL,NULL,NULL,'0cdba6078e2f91627da574fd069ba98bb11b0c30','𪱛뗏𥢱𘄦𑌪𐐆𭗻䤽𩱋鏯멫剱𫉾滟𘂶⣿뉝𭳄𡡸﹩䓙',1,NULL,'admin');
+--    USUARIO       PASSWORD
+--      andres          a
+--      oscar           o
+--      umberto         u
+INSERT INTO usuarios (activation_code,active,direccion,email,password,password_hash,password_salt,`role`,telefono,username, full_name) VALUES
+	 ('BEZ7104HEyeUElmmcA7haryEy1PrNG7w',0,NULL,NULL,NULL,'14afb45e0a83eb04426edbdf7fd9d083709e133b','𥕌𢠶ﷁ𖭨𣥷𪼪🠂𭋾ஔ䪪𭌇잡𪀚𑘈㻹撅搀䑵𨰟众맠',0,NULL,'umberto', 'Umberto García'),
+	 ('Z7ubteBnAmcEBHWrDFpF58YOAd8yv8VE',0,NULL,NULL,NULL,'0cdba6078e2f91627da574fd069ba98bb11b0c30','𪱛뗏𥢱𘄦𑌪𐐆𭗻䤽𩱋鏯멫剱𫉾滟𘂶⣿뉝𭳄𡡸﹩䓙',1,NULL,'andres', 'Andres Segovia');
 
-INSERT INTO usuarios ( activation_code, active, direccion, email, password, password_hash, password_salt, `role`, telefono, username) VALUES
-    ('ei7IO1mY8cAWpktJl0Po55xqW2Gm02aY', 0, NULL, NULL, NULL, '40525521ccf7b57f64856e277ef5ccd5a8224bc3', '蘒𩻵𠓏𑀝å𢍍𰌳葻𗳠坻𰵊𭸸𬌐ꀃ𡨇𗪚ꢖ𨼣𝀑', 0, NULL, 'operator');
+INSERT INTO usuarios ( activation_code, active, direccion, email, password, password_hash, password_salt, `role`, telefono, username, full_name) VALUES
+    ('ei7IO1mY8cAWpktJl0Po55xqW2Gm02aY', 0, NULL, NULL, NULL, '40525521ccf7b57f64856e277ef5ccd5a8224bc3', '蘒𩻵𠓏𑀝å𢍍𰌳葻𗳠坻𰵊𭸸𬌐ꀃ𡨇𗪚ꢖ𨼣𝀑', 0, NULL, 'oscar', 'Oscar Pérez');
 
 
 
