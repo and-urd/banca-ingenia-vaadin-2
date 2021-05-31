@@ -19,7 +19,7 @@ import io.oferto.application.views.tarjetas.TarjetasView;
 
 import java.util.List;
 
-@Route(value = "cuentas", layout = MainView.class)
+//@Route(value = "cuentas", layout = MainView.class)
 @PageTitle("Bienvenido/a a tu banca")
 public class CuentasView extends VerticalLayout {
 

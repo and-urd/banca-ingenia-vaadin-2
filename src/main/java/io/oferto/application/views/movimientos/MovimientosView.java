@@ -20,7 +20,7 @@ import org.vaadin.klaudeta.PaginatedGrid;
 
 import java.util.List;
 
-@Route(value = "movimientos", layout = MainView.class)
+//@Route(value = "movimientos", layout = MainView.class)
 @PageTitle("Bienvenido/a a tu banca")
 public class MovimientosView extends VerticalLayout {
 
