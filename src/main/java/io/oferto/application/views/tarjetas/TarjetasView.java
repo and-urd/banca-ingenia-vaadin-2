@@ -1,25 +1,23 @@
 package io.oferto.application.views.tarjetas;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.SortDirection;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
 import io.oferto.application.backend.modelbanca.Tarjeta;
+import io.oferto.application.backend.modelbanca.Usuario;
 import io.oferto.application.backend.servicebanca.CuentaService;
 import io.oferto.application.backend.servicebanca.MovimientoService;
 import io.oferto.application.backend.servicebanca.TarjetaService;
 //import io.oferto.application.components.AuthenticatedButton;
 //import io.oferto.application.security.SecurityConfiguration;
-import io.oferto.application.views.main.MainView;
-import io.oferto.application.views.tarjeta.TarjetaForm;
+import io.oferto.application.backend.servicebanca.impl.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,12 +37,13 @@ public class TarjetasView extends VerticalLayout {
     private final TarjetaService tarjetaService;
     private final CuentaService cuentaService;
     private final MovimientoService movimientoService;
+    private final AuthService authService;
 
-    public TarjetasView(TarjetaService tarjetaService, CuentaService cuentaService, MovimientoService movimientoService){
+    public TarjetasView(TarjetaService tarjetaService, CuentaService cuentaService, MovimientoService movimientoService, AuthService authService){
         this.tarjetaService = tarjetaService;
         this.cuentaService = cuentaService;
         this.movimientoService = movimientoService;
-
+        this.authService = authService;
 
 
 //        addClassName("about-view");
@@ -83,7 +82,15 @@ public class TarjetasView extends VerticalLayout {
 
     private void loadData() {
         try {
-            this.tarjetas = tarjetaService.encuentraTarjetas();
+
+            // todo -- recuperar las tarjetas del usuario logeado
+
+            // recupera usuarioLogeado
+            Usuario usuarioLogeado = authService.recuperaUsuarioLogeado();
+
+//            this.tarjetas = tarjetaService.encuentraTarjetas();
+            this.tarjetas = tarjetaService.tarjetasUsuarioPorId(usuarioLogeado.getId());
+
         }
         catch(Exception ex) {
             ex.printStackTrace();

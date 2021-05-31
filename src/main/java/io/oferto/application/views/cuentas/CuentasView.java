@@ -3,18 +3,16 @@ package io.oferto.application.views.cuentas;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.SortDirection;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
 import io.oferto.application.backend.modelbanca.Cuenta;
+import io.oferto.application.backend.modelbanca.Usuario;
 import io.oferto.application.backend.servicebanca.CuentaService;
-import io.oferto.application.views.main.MainView;
+import io.oferto.application.backend.servicebanca.impl.AuthService;
 import io.oferto.application.views.tarjetas.TarjetasView;
 
 import java.util.List;
@@ -24,11 +22,13 @@ import java.util.List;
 public class CuentasView extends VerticalLayout {
 
     private CuentaService cuentaService;
+    private final AuthService authService;
     private Grid <Cuenta> cuentaGrid = new Grid<>(Cuenta.class);
     private List<Cuenta> cuentaList;
     private ListDataProvider<Cuenta>cuentaListDataProvider;
 
-    public CuentasView(CuentaService cuentaService){
+    public CuentasView(CuentaService cuentaService, AuthService authService){
+        this.authService = authService;
 //        this.setSizeFull();
         this.setWidth("1000px");
         this.setPadding(true);
@@ -42,7 +42,15 @@ public class CuentasView extends VerticalLayout {
 
     private void loadData(){
         try{
-            this.cuentaList = cuentaService.findAll();
+
+
+
+            // recupera usuarioLogeado
+            Usuario usuarioLogeado = authService.recuperaUsuarioLogeado();
+
+            this.cuentaList = cuentaService.encuentraCuentasDeUsuario(usuarioLogeado.getId());
+
+
         }
         catch (Exception ex){
             ex.printStackTrace();

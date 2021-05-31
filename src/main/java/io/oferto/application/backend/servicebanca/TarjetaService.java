@@ -20,4 +20,7 @@ public interface TarjetaService {
     // Borrar una tarjeta
     void borrarTarjeta(Tarjeta tarjeta);
 
+    // Recuperar las Tarjetas de un Usuario por su Id
+    List<Tarjeta> tarjetasUsuarioPorId(Long id);
+
 }

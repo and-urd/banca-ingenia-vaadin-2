@@ -8,8 +8,10 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import io.oferto.application.backend.modelbanca.Tarjeta;
+import io.oferto.application.backend.modelbanca.Usuario;
 import io.oferto.application.backend.servicebanca.MovimientoService;
 import io.oferto.application.backend.servicebanca.TarjetaService;
+import io.oferto.application.backend.servicebanca.impl.AuthService;
 import io.oferto.application.views.tarjetas.TarjetasView;
 
 import java.util.List;
@@ -19,10 +21,12 @@ public class PanelTarjetasInicio extends VerticalLayout {
     // Inyección de servicios
     private final MovimientoService movimientoService;
     private final TarjetaService tarjetaService;
+    private final AuthService authService;
 
-    public PanelTarjetasInicio(MovimientoService movimientoService, TarjetaService tarjetaService) {
+    public PanelTarjetasInicio(MovimientoService movimientoService, TarjetaService tarjetaService,AuthService authService) {
         this.movimientoService = movimientoService;
         this.tarjetaService = tarjetaService;
+        this.authService = authService;
 
         this.setBoxSizing(BoxSizing.BORDER_BOX);
         this.setPadding(false);
@@ -49,10 +53,21 @@ public class PanelTarjetasInicio extends VerticalLayout {
         layoutCards.setWidth("1000px");
         layoutCards.setPadding(false);
 
-        List<Tarjeta> listadoTarjetas = tarjetaService.encuentraTarjetas();
 
-        int numTarjetasAMostrar = 3;
+        // todo -- recuperar solamente las tarjetas del usuario logeado
+
+//        List<Tarjeta> listadoTarjetas = tarjetaService.encuentraTarjetas();
+        Usuario usuarioLogeado = authService.recuperaUsuarioLogeado();
+        List<Tarjeta> listadoTarjetas = tarjetaService.tarjetasUsuarioPorId(usuarioLogeado.getId());
+
+
+
+
+        int numTarjetasAMostrar = 4;
         for (int i = 0; i < numTarjetasAMostrar ; i++) {
+
+            if(i >= listadoTarjetas.size()) break;
+
             Tarjeta tarjeta = listadoTarjetas.get(i);
             CardTarjeta cardTarjeta = new CardTarjeta(  tarjeta.getCuenta().getEntidad(),
                                                         movimientoService.saldoTotalTarjeta(tarjeta.getNumeroTarjeta()),
