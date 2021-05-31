@@ -15,6 +15,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import io.oferto.application.backend.servicebanca.impl.AuthService;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Route("register")
 public class RegisterView extends VerticalLayout {
 
@@ -77,18 +80,38 @@ public class RegisterView extends VerticalLayout {
 
     public void register(String fullName, String email, String username, String password1, String password2) {
         if (username.trim().isEmpty()) {
-            Notification.show("Enter a username");
+            Notification.show("Enter a username",2000, Notification.Position.MIDDLE);
         } else if (password1.isEmpty()) {
-            Notification.show("Enter a password");
+            Notification.show("Enter a password",2000, Notification.Position.MIDDLE);
         } else if (!password1.equals(password2)) {
-            Notification.show("Passwords don't match");
+            Notification.show("Passwords don't match",2000, Notification.Position.MIDDLE);
         } else if (fullName.trim().isEmpty()){
-            Notification.show("Enter a Full Name");
-        }
-
-        else {
+            Notification.show("Enter a Full Name",2000, Notification.Position.MIDDLE);
+        }else if(invalidEmail(email)) {
+            Notification.show("Invalid email",2000, Notification.Position.MIDDLE);
+        }else {
             authService.register(fullName, email, username, password1);
             UI.getCurrent().getPage().setLocation("login");
         }
+    }
+
+    private boolean invalidEmail(String email) {
+
+        // Patrón para validar el email
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+
+        Matcher mather = pattern.matcher(email);
+
+        if (mather.find() == true) {
+            return false;
+        } else {
+            return true;
+        }
+
+
+
     }
 }
