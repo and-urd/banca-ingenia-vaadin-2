@@ -8,6 +8,7 @@ import com.vaadin.flow.server.VaadinSession;
 import io.oferto.application.backend.modelbanca.Role;
 import io.oferto.application.backend.modelbanca.Usuario;
 import io.oferto.application.backend.repositorybanca.UserRepository;
+import io.oferto.application.views.balance.BalanceView;
 import io.oferto.application.views.cuentas.CuentasView;
 
 import io.oferto.application.views.inicio.InicioView;
@@ -71,12 +72,14 @@ public class AuthService {
             routes.add(new AuthorizedRoute("cuentas", "Cuentas", CuentasView.class));
             routes.add(new AuthorizedRoute("tarjetas", "Tarjetas", TarjetasView.class));
             routes.add(new AuthorizedRoute("movimientos", "Movimientos", MovimientosView.class));
+            routes.add(new AuthorizedRoute("balance", "Balance", BalanceView.class));
 
         } else if (role.equals(Role.ADMIN)) {
             routes.add(new AuthorizedRoute("inicio", "Inicio", InicioView.class));
             routes.add(new AuthorizedRoute("cuentas", "Cuentas", CuentasView.class));
             routes.add(new AuthorizedRoute("tarjetas", "Tarjetas", TarjetasView.class));
             routes.add(new AuthorizedRoute("movimientos", "Movimientos", MovimientosView.class));
+            routes.add(new AuthorizedRoute("balance", "Balance", BalanceView.class));
         }
 
         return routes;

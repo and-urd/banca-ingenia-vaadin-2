@@ -30,6 +30,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 //import io.oferto.application.security.SecurityConfiguration;
 import io.oferto.application.backend.modelbanca.Usuario;
 import io.oferto.application.backend.servicebanca.impl.AuthService;
+import io.oferto.application.views.balance.BalanceView;
 import io.oferto.application.views.cuentas.CuentasView;
 import io.oferto.application.views.inicio.InicioView;
 import io.oferto.application.views.movimientos.MovimientosView;
@@ -128,6 +129,7 @@ public class MainView extends AppLayout {
         tabs.add(createTab("Tarjetas", TarjetasView.class));
         tabs.add(createTab("Cuentas", CuentasView.class));
         tabs.add(createTab("Movimientos", MovimientosView.class));
+        tabs.add(createTab("Balance", BalanceView.class));
     	return tabs.toArray(new Tab[tabs.size()]);
     }
     
