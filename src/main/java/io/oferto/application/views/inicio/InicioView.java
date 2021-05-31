@@ -1,14 +1,20 @@
 package io.oferto.application.views.inicio;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.router.RouterLink;
 import io.oferto.application.backend.servicebanca.MovimientoService;
 import io.oferto.application.backend.servicebanca.TarjetaService;
 import io.oferto.application.backend.servicebanca.impl.AuthService;
 import io.oferto.application.views.movimientos.MovimientosView;
+import io.oferto.application.views.tarjetas.TarjetasView;
 
 //@RouteAlias(value = "", layout = MainView.class)
 //@Route(value = "inicio", layout = MainView.class)
@@ -27,7 +33,7 @@ public class InicioView extends VerticalLayout {
         this.setSizeFull();
         this.setPadding(true);
 
-        PanelTarjetasInicio panelTarjetasInicio = new PanelTarjetasInicio(movimientoService, this.tarjetaService);
+        PanelTarjetasInicio panelTarjetasInicio = new PanelTarjetasInicio(movimientoService, this.tarjetaService, this.authService);
         PanelMovimientosInicio panelMovimientosInicio = new PanelMovimientosInicio(movimientoService, this.authService);
 
         //createPanelTarjetaLayout()

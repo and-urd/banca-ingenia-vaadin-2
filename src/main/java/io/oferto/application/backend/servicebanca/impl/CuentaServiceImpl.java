@@ -143,6 +143,41 @@ public class CuentaServiceImpl implements CuentaService {
          return cuentaRepository.findAll();
     }
 
+
+
+
+
+
+
+    @Override
+    public List<Cuenta> encuentraCuentasDeUsuario(Long idUsuario) {
+
+
+
+
+        List<Cuenta> listadoCuentas = cuentaRepository.findAll(); // Listado de todas las cuentas
+
+        List<Cuenta> listadoResultante = new ArrayList<>(); // Donde almacenaremos el resultado
+
+        for (int i = 0; i < listadoCuentas.size(); i++) { // Para cada Cuenta
+
+            List<Usuario> listadoUsers = listadoCuentas.get(i).getUsers(); // Los Usuarios de la cuenta i
+
+            for (int j = 0; j < listadoUsers.size(); j++) { // para cada usuario de la cuenta i
+                if (listadoUsers.get(j).getId() == idUsuario)
+                    listadoResultante.add(listadoCuentas.get(i));
+            }
+        }
+
+        return listadoResultante;
+
+
+
+
+
+
+    }
+
 //    @Override
 //    public Cuenta creaCuentaCompleta(Cuenta cuenta, Usuario usuario,  Tarjeta tarjeta, Movimiento movimiento) {
 //
