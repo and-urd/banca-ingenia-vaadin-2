@@ -76,6 +76,7 @@ public class MovimientoServiceImpl implements MovimientoService {
         return listResultado;
     }
 
+
     @Override
     public List<Movimiento> recuperaTodosMovimientos() {
         return movimientoRepository.findAll();

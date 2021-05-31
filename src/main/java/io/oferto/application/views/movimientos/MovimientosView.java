@@ -1,7 +1,6 @@
 package io.oferto.application.views.movimientos;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
@@ -11,10 +10,10 @@ import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.SortDirection;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
 import io.oferto.application.backend.modelbanca.Movimiento;
+import io.oferto.application.backend.modelbanca.Usuario;
 import io.oferto.application.backend.servicebanca.MovimientoService;
-import io.oferto.application.views.main.MainView;
+import io.oferto.application.backend.servicebanca.impl.AuthService;
 import io.oferto.application.views.tarjetas.TarjetasView;
 import org.vaadin.klaudeta.PaginatedGrid;
 
@@ -24,16 +23,19 @@ import java.util.List;
 @PageTitle("Bienvenido/a a tu banca")
 public class MovimientosView extends VerticalLayout {
 
-    private MovimientoService movimientoService;
+    private final MovimientoService movimientoService;
+    private final AuthService authService;
     private PaginatedGrid<Movimiento> movimientoGrid = new PaginatedGrid<>(Movimiento.class);
     private List<Movimiento> movimientoList;
     private ListDataProvider<Movimiento>movimientoListDataProvider;
 
-    public MovimientosView(MovimientoService movimientoService){
+    public MovimientosView(MovimientoService movimientoService, AuthService authService){
+
 //        this.setSizeFull();
         this.setWidth("1000px");
         this.setPadding(true);
 
+        this.authService = authService;
         this.movimientoService = movimientoService;
 
         loadData();
@@ -43,7 +45,8 @@ public class MovimientosView extends VerticalLayout {
 
     private void loadData(){
         try{
-            this.movimientoList = movimientoService.recuperaTodosMovimientos();
+            Usuario usuarioLogeado = authService.recuperaUsuarioLogeado();
+            this.movimientoList = movimientoService.recuperaMovimientosPorIdUsuario(usuarioLogeado.getId());
         }
         catch (Exception ex){
             ex.printStackTrace();

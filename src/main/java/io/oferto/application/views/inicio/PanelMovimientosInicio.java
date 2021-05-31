@@ -1,9 +1,7 @@
 package io.oferto.application.views.inicio;
 
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
-import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -11,8 +9,9 @@ import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.SortDirection;
 import io.oferto.application.backend.modelbanca.Movimiento;
+import io.oferto.application.backend.modelbanca.Usuario;
 import io.oferto.application.backend.servicebanca.MovimientoService;
-import io.oferto.application.views.movimientos.MovimientosView;
+import io.oferto.application.backend.servicebanca.impl.AuthService;
 import io.oferto.application.views.tarjetas.TarjetasView;
 
 import java.util.ArrayList;
@@ -20,17 +19,19 @@ import java.util.List;
 
 public class PanelMovimientosInicio extends HorizontalLayout {
 
-    private MovimientoService movimientoService;
+    private final MovimientoService movimientoService;
+    private final AuthService authService;
     private Grid<Movimiento> movimientoGrid = new Grid<>(Movimiento.class);
     private List<Movimiento> movimientoList;
     private ListDataProvider<Movimiento> movimientoListDataProvider;
 
-    public PanelMovimientosInicio(MovimientoService movimientoService) {
+    public PanelMovimientosInicio(MovimientoService movimientoService, AuthService authService) {
 //        this.setSizeFull();
         this.setWidth("1000px");
         this.setPadding(false);
         this.setMargin(false);
 
+        this.authService = authService;
         this.movimientoService = movimientoService;
 
         loadData();
@@ -48,7 +49,10 @@ public class PanelMovimientosInicio extends HorizontalLayout {
     }
 
     private List<Movimiento> movimientosReducidos(){
-        this.movimientoList = movimientoService.recuperaTodosMovimientos();
+
+        Usuario usuarioLogeado = authService.recuperaUsuarioLogeado();
+        this.movimientoList = movimientoService.recuperaMovimientosPorIdUsuario(usuarioLogeado.getId());
+
         List<Movimiento> movimientoResultado = new ArrayList<>();
         int limiteMax = 9;
         for (int i = movimientoList.size() - limiteMax; i < movimientoList.size(); i++) {

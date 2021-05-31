@@ -169,7 +169,7 @@ public class MainView extends AppLayout {
 
         MenuItem menuItemProfile = null;
         if (usuarioLog != null) {
-            menuItemProfile = menuBarProfile.addItem(usuarioLog.getUsername());
+            menuItemProfile = menuBarProfile.addItem(usuarioLog.getFullName());
         }
 
             

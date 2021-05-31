@@ -51,10 +51,14 @@ public class RegisterView extends VerticalLayout {
 
 //        Image logo = new Image("images/logo-banca-ingenia.PNG", "Banca Ingenia");
 //        H3 tittle = new H3("Sign up");
+        TextField fullName = new TextField("Full name");
+        TextField email = new TextField("Email");
         TextField username = new TextField("Username");
         PasswordField password1 = new PasswordField("Password");
         PasswordField password2 = new PasswordField("Confirm password");
         Button registerButton = new Button("Submit", event -> register(
+                fullName.getValue(),
+                email.getValue(),
                 username.getValue(),
                 password1.getValue(),
                 password2.getValue()
@@ -62,7 +66,7 @@ public class RegisterView extends VerticalLayout {
 
         VerticalLayout registerLayout = new VerticalLayout();
 
-        registerLayout.add(layoutCabecera, username, password1, password2, registerButton);
+        registerLayout.add(layoutCabecera, fullName, email, username, password1, password2, registerButton);
         registerLayout.setHeightFull();
         registerLayout.setJustifyContentMode(JustifyContentMode.CENTER);
         registerLayout.setAlignItems(Alignment.CENTER);
@@ -71,15 +75,19 @@ public class RegisterView extends VerticalLayout {
         return registerLayout;
     }
 
-    public void register(String username, String password1, String password2) {
+    public void register(String fullName, String email, String username, String password1, String password2) {
         if (username.trim().isEmpty()) {
             Notification.show("Enter a username");
         } else if (password1.isEmpty()) {
             Notification.show("Enter a password");
         } else if (!password1.equals(password2)) {
             Notification.show("Passwords don't match");
-        } else {
-            authService.register(username, password1);
+        } else if (fullName.trim().isEmpty()){
+            Notification.show("Enter a Full Name");
+        }
+
+        else {
+            authService.register(fullName, email, username, password1);
             UI.getCurrent().getPage().setLocation("login");
         }
     }

@@ -18,6 +18,8 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String fullName;
+
     private String username;
 
     private String email;
@@ -52,7 +54,9 @@ public class Usuario {
         this.email = email;
         this.password = password;
     }
-    public Usuario(String username, String password, Role role) {
+    public Usuario(String fullName, String email, String username, String password, Role role) {
+        this.fullName = fullName;
+        this.email= email;
         this.username = username;
         this.role = role;
         this.passwordSalt = RandomStringUtils.random(32);
@@ -163,5 +167,13 @@ public class Usuario {
 
     public void setCuentas(List<Cuenta> cuentas) {
         this.cuentas = cuentas;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

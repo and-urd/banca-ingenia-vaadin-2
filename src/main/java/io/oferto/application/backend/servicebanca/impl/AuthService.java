@@ -82,8 +82,8 @@ public class AuthService {
         return routes;
     }
 
-    public void register(String email, String password) {
-        Usuario user = userRepository.save(new Usuario(email, password, Role.USER));
+    public void register(String fullName, String email, String username, String password) {
+        Usuario user = userRepository.save(new Usuario(fullName, email, username, password, Role.USER));
 //        String text = "http://localhost:8080/activate?code=" + user.getActivationCode();
 //        SimpleMailMessage message = new SimpleMailMessage();
 //        message.setFrom("noreply@example.com");
