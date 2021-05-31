@@ -26,7 +26,7 @@ public interface CuentaService {
 
     List<Cuenta> findAll();
 
-    // Crea una cuenta completa
-//    Cuenta creaCuentaCompleta(Cuenta cuenta, Usuario usuario,  Tarjeta tarjeta, Movimiento movimiento);
+    // Recupera listado de Cuentas de un usuario por su Id
+    List<Cuenta> encuentraCuentasDeUsuario(Long idUsuario);
 
 }

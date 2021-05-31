@@ -79,4 +79,20 @@ public class TarjetaServiceImpl implements TarjetaService {
         tarjetaRepository.deleteById(tarjeta.getId());
     }
 
+    @Override
+    public List<Tarjeta> tarjetasUsuarioPorId(Long idUsuario) {
+        List<Tarjeta> listadoResultado = new ArrayList<>();
+
+        for (Cuenta cuenta: cuentaService.listadoCompletoCuentas()) { // Para cada Cuenta
+            for (Usuario user: cuenta.getUsers()) { // Para cada Usuario de la Cuenta i
+                if(user.getId()== idUsuario){
+                    for (Tarjeta tarjeta : cuenta.getTarjetas()) {
+                        listadoResultado.add(tarjeta);
+                    }
+                }
+            }
+        }
+        return listadoResultado;
+    }
+
 }
