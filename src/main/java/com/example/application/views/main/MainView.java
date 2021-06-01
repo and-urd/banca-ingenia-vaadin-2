@@ -151,6 +151,9 @@ public class MainView extends AppLayout {
             case "Movimientos":
                 icono = new Icon(VaadinIcon.EXCHANGE);
                 break;
+            case "Balance":
+                icono = new Icon(VaadinIcon.BAR_CHART);
+                break;
             default:
                 icono = new Icon();
         }

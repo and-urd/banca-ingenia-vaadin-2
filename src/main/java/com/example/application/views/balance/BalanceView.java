@@ -1,20 +1,21 @@
 package com.example.application.views.balance;
 
 import com.example.application.backend.modelbanca.Categoria;
+import com.example.application.backend.modelbanca.Movimiento;
+import com.example.application.backend.modelbanca.Usuario;
 import com.example.application.backend.servicebanca.CategoriaService;
 import com.example.application.backend.servicebanca.MovimientoService;
 import com.example.application.backend.servicebanca.impl.AuthService;
 import com.storedobject.chart.*;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H5;
-import com.vaadin.flow.component.html.H6;
-import com.vaadin.flow.component.html.Hr;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @PageTitle("Balance")
 public class BalanceView extends VerticalLayout {
@@ -31,20 +32,7 @@ public class BalanceView extends VerticalLayout {
         this.setPadding(true);
 
 
-
-
-
         add(layoutGrafica1(), new Hr(), layoutGrafica2());
-
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -143,17 +131,54 @@ public class BalanceView extends VerticalLayout {
     }
 
 
-
-
-
-
-
     private VerticalLayout layoutGrafica2() {
 
         VerticalLayout layout = new VerticalLayout();
 
-        layout.add(new H1("Grafica 2"));
+        SOChart soChart = new SOChart();
+        soChart.setSize("800px", "500px");
+
+        Data fechas = new Data();
+        Data saldos = new Data();
+
+        List<Movimiento>movimientoList = movimientosReducidos();
+        for (int i = 0; i < movimientoList.size(); i++) {
+//            fechas.add(movimientosReducidos().get(i).getFechaOperacion().getDayOfMonth());
+            fechas.add(i);
+            saldos.add(movimientosReducidos().get(i).getSaldoActual());
+        }
+
+        BarChart bc = new BarChart(fechas, saldos);
+        RectangularCoordinate rc;
+        rc  = new RectangularCoordinate(new XAxis(DataType.DATE), new YAxis(DataType.NUMBER));
+        Position p = new Position();
+        p.setBottom(Size.percentage(55));
+        rc.setPosition(p); // Position it leaving 55% space at the bottom
+        bc.plotOn(rc); // Bar chart needs to be plotted on a coordinate system
+
+// Just to demonstrate it, we are creating a "Download" and a "Zoom" toolbox button.
+        Toolbox toolbox = new Toolbox();
+        toolbox.addButton(new Toolbox.Download(), new Toolbox.Zoom());
+
+// Add the chart components to the chart display area.
+        soChart.add(bc);
+
+
+        layout.add(new H5("Últimos 10 Movimientos: Saldo - Fecha"), soChart);
 
         return layout;
+    }
+
+    private List<Movimiento> movimientosReducidos(){
+        List<Movimiento>movimientoList=new ArrayList<>();
+        Usuario usuarioLogeado = authService.recuperaUsuarioLogeado();
+        movimientoList = movimientoService.recuperaMovimientosPorIdUsuario(usuarioLogeado.getId());
+
+        List<Movimiento> movimientoResultado = new ArrayList<>();
+        int limiteMax = 10;
+        for (int i = movimientoList.size() - limiteMax; i < movimientoList.size(); i++) {
+            movimientoResultado.add(movimientoList.get(i));
+        }
+        return movimientoResultado;
     }
 }
