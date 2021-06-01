@@ -71,7 +71,7 @@ public class PanelTarjetasInicio extends VerticalLayout {
                                                         movimientoService.saldoTotalTarjeta(tarjeta.getNumeroTarjeta()),
                                                         TarjetasView.tarjetaUltimosDigitos(tarjeta.getNumeroTarjeta()),
                                                         tarjeta.getTipoTarjeta());
-            layoutCards.addAndExpand(cardTarjeta);
+            layoutCards.add(cardTarjeta);
         }
 
 

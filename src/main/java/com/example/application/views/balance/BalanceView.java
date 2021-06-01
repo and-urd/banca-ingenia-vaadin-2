@@ -32,12 +32,12 @@ public class BalanceView extends VerticalLayout {
         this.setPadding(true);
 
 
-        add(layoutGrafica1(), new Hr(), layoutGrafica2());
+        add(layoutGrafica1(categoriaService, authService, movimientoService, "800px", "300px"), new Hr(), layoutGrafica2());
     }
 
 
 
-    private VerticalLayout layoutGrafica1() {
+    public static VerticalLayout layoutGrafica1(CategoriaService categoriaService, AuthService authService, MovimientoService movimientoService, String ancho, String alto) {
 
         VerticalLayout layout = new VerticalLayout();
 
@@ -45,7 +45,7 @@ public class BalanceView extends VerticalLayout {
 
         // Creating a chart display area.
         SOChart soChart = new SOChart();
-        soChart.setSize("800px", "300px");
+        soChart.setSize(ancho, alto);
 
 
         Integer numTotalMovim = 100;

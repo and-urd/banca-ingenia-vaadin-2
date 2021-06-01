@@ -1,11 +1,14 @@
 package com.example.application.views.inicio;
 
 import com.example.application.backend.servicebanca.MovimientoService;
+import com.example.application.views.movimientos.MovimientosView;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.SortDirection;
@@ -13,11 +16,12 @@ import com.example.application.backend.modelbanca.Movimiento;
 import com.example.application.backend.modelbanca.Usuario;
 import com.example.application.backend.servicebanca.impl.AuthService;
 import com.example.application.views.tarjetas.TarjetasView;
+import com.vaadin.flow.router.RouterLink;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PanelMovimientosInicio extends HorizontalLayout {
+public class PanelMovimientosInicio extends VerticalLayout {
 
     private final MovimientoService movimientoService;
     private final AuthService authService;
@@ -36,7 +40,23 @@ public class PanelMovimientosInicio extends HorizontalLayout {
 
         loadData();
 
+        HorizontalLayout toolBarLayout = new HorizontalLayout();
+//        toolBarLayout.setWidthFull();
+        toolBarLayout.setWidth("1000px");
+        H3 h3Movimientos = new H3("Movimientos");
+        h3Movimientos.getElement().getStyle().set("margin-right", "auto");
+
+        RouterLink routerLink = new RouterLink("Ver más", MovimientosView.class);
+//        routerLink.getElement().getStyle().set("margin-top", "auto");
+
+        toolBarLayout.add(h3Movimientos, routerLink);
+        add(toolBarLayout);
+
         configureGrid();
+
+
+
+
     }
 
     private void loadData(){

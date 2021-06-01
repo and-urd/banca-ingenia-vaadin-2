@@ -1,7 +1,10 @@
 package com.example.application.views.inicio;
 
+import com.example.application.backend.servicebanca.CategoriaService;
 import com.example.application.backend.servicebanca.MovimientoService;
 import com.example.application.backend.servicebanca.TarjetaService;
+import com.example.application.views.balance.BalanceView;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -18,22 +21,37 @@ public class InicioView extends VerticalLayout {
     private final MovimientoService movimientoService;
     private final TarjetaService tarjetaService;
     private final AuthService authService;
+    private final CategoriaService categoriaService;
 
-    public InicioView(MovimientoService movimientoService, TarjetaService tarjetaService, AuthService authService){
+    public InicioView(MovimientoService movimientoService, TarjetaService tarjetaService, AuthService authService, CategoriaService categoriaService){
         this.movimientoService = movimientoService;
         this.tarjetaService = tarjetaService;
         this.authService = authService;
+        this.categoriaService = categoriaService;
 
-        this.setSizeFull();
+//        this.setSizeFull();
+        this.setWidth("1000px");
         this.setPadding(true);
 
+        HorizontalLayout layoutSuperior = new HorizontalLayout();
+
         PanelTarjetasInicio panelTarjetasInicio = new PanelTarjetasInicio(movimientoService, this.tarjetaService, this.authService);
+
+        layoutSuperior.add(panelTarjetasInicio);
+        layoutSuperior.add(BalanceView.layoutGrafica1(categoriaService, authService,movimientoService, "350px", "350px"));
+
+
+        HorizontalLayout layoutInferior = new HorizontalLayout();
+
         PanelMovimientosInicio panelMovimientosInicio = new PanelMovimientosInicio(movimientoService, this.authService);
+        layoutInferior.add(panelMovimientosInicio);
+        layoutInferior.add(new H1("Grafica Barras"));
+
 
         //createPanelTarjetaLayout()
-        add(panelTarjetasInicio);
-        createPanelMovimientoLayout();
-        add(panelMovimientosInicio);
+        add(layoutSuperior);
+//        createPanelMovimientoLayout();
+        add(layoutInferior);
     }
 
     private void createPanelMovimientoLayout(){
