@@ -50,6 +50,7 @@ INSERT INTO usuarios ( activation_code, active, direccion, email, password, pass
 INSERT INTO cuentas_users (cuenta_id,user_id) VALUES
 	 (1,1),
 	 (1,2),
+	 (4,2),
 	 (2,3),
 	 (3,3);
 

@@ -1,6 +1,10 @@
 package com.example.application.views.balance;
 
 import com.storedobject.chart.*;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Hr;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 
@@ -13,6 +17,29 @@ public class BalanceView extends VerticalLayout {
         this.setPadding(true);
 
 
+
+
+
+        add(layoutGrafica1(), new Hr(), layoutGrafica2());
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+    private VerticalLayout layoutGrafica1() {
+
+        VerticalLayout layout = new VerticalLayout();
+
+        layout.add(new H1("Grafica 1"));
 
         // Creating a chart display area.
         SOChart soChart = new SOChart();
@@ -48,10 +75,28 @@ public class BalanceView extends VerticalLayout {
         title.setSubtext("2nd Line of the Title");
 
 // Add the chart components to the chart display area.
-        soChart.add(/*nc,*/ bc, toolbox, title);
+        soChart.add(nc/*, bc*/, toolbox, title);
 
 // Now, add the chart display (which is a Vaadin Component) to your layout.
-        add(soChart);
+        layout.add(soChart);
 
+
+
+        return layout;
+    }
+
+
+
+
+
+
+
+    private VerticalLayout layoutGrafica2() {
+
+        VerticalLayout layout = new VerticalLayout();
+
+        layout.add(new H1("Grafica 2"));
+
+        return layout;
     }
 }
