@@ -90,5 +90,32 @@ public class MovimientoServiceImpl implements MovimientoService {
         return saldoTotal;
     }
 
+    // Calcula el total por categorias en los últimos 'numMovimientos'
+    @Override
+    public Double totalPorCategoria(Long idUsuario, String categoria, Integer numMovimientos) {
+
+        List<Movimiento> listadoMovimientos =  this.recuperaMovimientosPorIdUsuario(idUsuario);
+
+
+        List<Movimiento> movimientoResultado = new ArrayList<>();
+        int limiteMax = numMovimientos;
+        for (int i = listadoMovimientos.size() - limiteMax; i < listadoMovimientos.size(); i++) {
+
+            if(i < 0)  continue;
+
+            movimientoResultado.add(listadoMovimientos.get(i));
+        }
+
+        Double total = 0d;
+
+        for (Movimiento movimiento : movimientoResultado) {
+            if(movimiento.getCategoria().getTipoCategoria().equals(categoria)){
+                total += movimiento.getCantidad();
+            }
+        }
+
+        return total;
+    }
+
 
 }

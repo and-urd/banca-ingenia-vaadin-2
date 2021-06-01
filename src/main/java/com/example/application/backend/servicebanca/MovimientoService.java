@@ -23,4 +23,7 @@ public interface MovimientoService {
 
     // Calcula el saldo total realizado por una tarjeta (numero de tarjeta (string))
     Double saldoTotalTarjeta(String numTarjeta);
+
+    // Calcula total por categoria, en los últimos X movimientos
+    Double totalPorCategoria(Long idUsuario, String categoria, Integer numMovimientos);
 }
