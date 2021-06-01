@@ -41,12 +41,11 @@ public class InicioView extends VerticalLayout {
         layoutSuperior.add(BalanceView.layoutGrafica1(categoriaService, authService,movimientoService, "350px", "350px"));
 
 
-        HorizontalLayout layoutInferior = new HorizontalLayout();
-
         PanelMovimientosInicio panelMovimientosInicio = new PanelMovimientosInicio(movimientoService, this.authService);
+        HorizontalLayout layoutInferior = new HorizontalLayout();
         layoutInferior.add(panelMovimientosInicio);
-        layoutInferior.add(new H1("Grafica Barras"));
-
+        BalanceView balanceView = new BalanceView(movimientoService, authService, categoriaService);
+        layoutInferior.add(balanceView.layoutGrafica2("350px", "500px"));
 
         //createPanelTarjetaLayout()
         add(layoutSuperior);

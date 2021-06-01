@@ -32,7 +32,8 @@ public class BalanceView extends VerticalLayout {
         this.setPadding(true);
 
 
-        add(layoutGrafica1(categoriaService, authService, movimientoService, "800px", "300px"), new Hr(), layoutGrafica2());
+        add(layoutGrafica1(categoriaService, authService, movimientoService, "800px", "300px"), new Hr(),
+                layoutGrafica2("800px", "500px"));
     }
 
 
@@ -132,12 +133,12 @@ public class BalanceView extends VerticalLayout {
     }
 
 
-    private VerticalLayout layoutGrafica2() {
+    public VerticalLayout layoutGrafica2(String ancho, String altura) {
 
         VerticalLayout layout = new VerticalLayout();
 
         SOChart soChart = new SOChart();
-        soChart.setSize("800px", "500px");
+        soChart.setSize(ancho, altura);
 
         Data fechas = new Data();
         Data saldos = new Data();
@@ -170,7 +171,7 @@ public class BalanceView extends VerticalLayout {
         return layout;
     }
 
-    private List<Movimiento> movimientosReducidos(){
+    public List<Movimiento> movimientosReducidos(){
         List<Movimiento>movimientoList=new ArrayList<>();
         Usuario usuarioLogeado = authService.recuperaUsuarioLogeado();
         movimientoList = movimientoService.recuperaMovimientosPorIdUsuario(usuarioLogeado.getId());
