@@ -115,12 +115,13 @@ public class BalanceView extends VerticalLayout {
 
 
 // Add the chart components to the chart display area.
-        H5 h5Titulo = new H5("Categorias");
+        H5 h5Titulo = new H5("Gastos por categoria");
         H5 h5Subtitulo = new H5("(porcentaje)");
         h5Subtitulo.getStyle().set("margin", "0px 0px");
 
         layout.add(h5Titulo, h5Subtitulo);
         soChart.add(nc);
+
 
 // Now, add the chart display (which is a Vaadin Component) to your layout.
         layout.add(soChart);
