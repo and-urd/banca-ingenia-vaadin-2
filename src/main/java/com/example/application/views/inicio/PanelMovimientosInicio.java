@@ -1,6 +1,7 @@
 package com.example.application.views.inicio;
 
 import com.example.application.backend.servicebanca.MovimientoService;
+import com.example.application.views.Uti;
 import com.example.application.views.movimientos.MovimientosView;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -31,7 +32,7 @@ public class PanelMovimientosInicio extends VerticalLayout {
 
     public PanelMovimientosInicio(MovimientoService movimientoService, AuthService authService) {
 //        this.setSizeFull();
-        this.setWidth("1000px");
+        this.setWidth(Uti.ANCHO_INICIO);
         this.setPadding(false);
         this.setMargin(false);
 
@@ -42,7 +43,7 @@ public class PanelMovimientosInicio extends VerticalLayout {
 
         HorizontalLayout toolBarLayout = new HorizontalLayout();
 //        toolBarLayout.setWidthFull();
-        toolBarLayout.setWidth("1000px");
+        toolBarLayout.setWidth(Uti.ANCHO_INICIO);
         H3 h3Movimientos = new H3("Movimientos");
         h3Movimientos.getElement().getStyle().set("margin-right", "auto");
 
@@ -92,7 +93,7 @@ public class PanelMovimientosInicio extends VerticalLayout {
     private void configureGrid(){
         loadGrid();
 //        movimientoGrid.setSizeFull();
-        movimientoGrid.setWidth("1000px");
+        movimientoGrid.setWidth(Uti.ANCHO_INICIO);
         movimientoGrid.setColumns("numTarjeta");
         movimientoGrid.getColumnByKey("numTarjeta").setHeader("Nº Tarjeta").setVisible(false);
 

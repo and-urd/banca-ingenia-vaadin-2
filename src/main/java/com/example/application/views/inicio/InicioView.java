@@ -3,6 +3,7 @@ package com.example.application.views.inicio;
 import com.example.application.backend.servicebanca.CategoriaService;
 import com.example.application.backend.servicebanca.MovimientoService;
 import com.example.application.backend.servicebanca.TarjetaService;
+import com.example.application.views.Uti;
 import com.example.application.views.balance.BalanceView;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
@@ -30,7 +31,7 @@ public class InicioView extends VerticalLayout {
         this.categoriaService = categoriaService;
 
 //        this.setSizeFull();
-        this.setWidth("1000px");
+        this.setWidth(Uti.ANCHO_INICIO);
         this.setPadding(true);
 
         HorizontalLayout layoutSuperior = new HorizontalLayout();
@@ -38,14 +39,14 @@ public class InicioView extends VerticalLayout {
         PanelTarjetasInicio panelTarjetasInicio = new PanelTarjetasInicio(movimientoService, this.tarjetaService, this.authService);
 
         layoutSuperior.add(panelTarjetasInicio);
-        layoutSuperior.add(BalanceView.layoutGrafica1(categoriaService, authService,movimientoService, "350px", "350px"));
+        layoutSuperior.add(BalanceView.layoutGrafica1(categoriaService, authService,movimientoService, "450px", "350px"));
 
 
         PanelMovimientosInicio panelMovimientosInicio = new PanelMovimientosInicio(movimientoService, this.authService);
         HorizontalLayout layoutInferior = new HorizontalLayout();
         layoutInferior.add(panelMovimientosInicio);
         BalanceView balanceView = new BalanceView(movimientoService, authService, categoriaService);
-        layoutInferior.add(balanceView.layoutGrafica2("350px", "500px"));
+        layoutInferior.add(balanceView.layoutGrafica2("450px", "500px"));
 
         //createPanelTarjetaLayout()
         add(layoutSuperior);
@@ -56,7 +57,7 @@ public class InicioView extends VerticalLayout {
     private void createPanelMovimientoLayout(){
         HorizontalLayout toolBarLayout = new HorizontalLayout();
 //        toolBarLayout.setWidthFull();
-        toolBarLayout.setWidth("1000px");
+        toolBarLayout.setWidth(Uti.ANCHO_INICIO);
         H3 h3Movimientos = new H3("Movimientos");
         h3Movimientos.getElement().getStyle().set("margin-right", "auto");
 

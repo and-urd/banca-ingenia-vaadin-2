@@ -6,6 +6,7 @@ import com.example.application.backend.servicebanca.CuentaService;
 import com.example.application.backend.servicebanca.MovimientoService;
 import com.example.application.backend.servicebanca.TarjetaService;
 import com.example.application.backend.servicebanca.impl.AuthService;
+import com.example.application.views.Uti;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -47,7 +48,7 @@ public class TarjetasView extends VerticalLayout {
 
 //        addClassName("about-view");
 //        setSizeFull();
-        this.setWidth("1000px");
+        this.setWidth(Uti.ANCHO);
         setPadding(true);
 
 
@@ -110,7 +111,7 @@ public class TarjetasView extends VerticalLayout {
         loadGrid();
 
 //        gridTarjeta.setSizeFull();
-        gridTarjeta.setWidth("1000px");
+        gridTarjeta.setWidth(Uti.ANCHO);
 
 
         gridTarjeta.setColumns("numeroTarjeta");

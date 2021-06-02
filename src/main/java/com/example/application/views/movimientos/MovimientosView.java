@@ -4,6 +4,7 @@ import com.example.application.backend.modelbanca.Movimiento;
 import com.example.application.backend.modelbanca.Usuario;
 import com.example.application.backend.servicebanca.MovimientoService;
 import com.example.application.backend.servicebanca.impl.AuthService;
+import com.example.application.views.Uti;
 import com.example.application.views.tarjetas.TarjetasView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -32,7 +33,7 @@ public class MovimientosView extends VerticalLayout {
     public MovimientosView(MovimientoService movimientoService, AuthService authService){
 
 //        this.setSizeFull();
-        this.setWidth("1000px");
+        this.setWidth(Uti.ANCHO);
         this.setPadding(true);
 
         this.authService = authService;
@@ -64,7 +65,7 @@ public class MovimientosView extends VerticalLayout {
     private void configureGrid(){
         loadGrid();
 //        movimientoGrid.setSizeFull();
-        movimientoGrid.setWidth("1000px");
+        movimientoGrid.setWidth(Uti.ANCHO);
 
         movimientoGrid.setColumns("numTarjeta");
         movimientoGrid.getColumnByKey("numTarjeta").setHeader("Nº Tarjeta").setVisible(false);

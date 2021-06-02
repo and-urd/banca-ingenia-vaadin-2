@@ -4,6 +4,7 @@ import com.example.application.backend.modelbanca.Cuenta;
 import com.example.application.backend.modelbanca.Usuario;
 import com.example.application.backend.servicebanca.CuentaService;
 import com.example.application.backend.servicebanca.impl.AuthService;
+import com.example.application.views.Uti;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -30,7 +31,7 @@ public class CuentasView extends VerticalLayout {
     public CuentasView(CuentaService cuentaService, AuthService authService){
         this.authService = authService;
 //        this.setSizeFull();
-        this.setWidth("1000px");
+        this.setWidth(Uti.ANCHO);
         this.setPadding(true);
 
         this.cuentaService=cuentaService;
@@ -67,7 +68,7 @@ public class CuentasView extends VerticalLayout {
     private void configureGrid(){
         loadGrid();
 //        cuentaGrid.setSizeFull();
-        cuentaGrid.setWidth("1000px");
+        cuentaGrid.setWidth(Uti.ANCHO);
         cuentaGrid.setColumns("numeroCuenta");
         cuentaGrid.getColumnByKey("numeroCuenta").setHeader("Nº Cuenta").setVisible(false);
 

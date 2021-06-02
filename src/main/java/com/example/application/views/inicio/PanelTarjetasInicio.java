@@ -2,6 +2,7 @@ package com.example.application.views.inicio;
 
 import com.example.application.backend.servicebanca.MovimientoService;
 import com.example.application.backend.servicebanca.TarjetaService;
+import com.example.application.views.Uti;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.BoxSizing;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -30,8 +31,8 @@ public class PanelTarjetasInicio extends VerticalLayout {
         this.setPadding(false);
 
         HorizontalLayout layoutHorCabecera = new HorizontalLayout();
-//        layoutHorCabecera.setWidthFull();
-        layoutHorCabecera.setWidth("1000px");
+
+        layoutHorCabecera.setWidth(Uti.ANCHO_INICIO);
         layoutHorCabecera.setPadding(false);
 
         H3 titulo = new H3("Tarjetas");
@@ -48,20 +49,20 @@ public class PanelTarjetasInicio extends VerticalLayout {
         this.add(layoutHorCabecera);
 
         HorizontalLayout layoutCards = new HorizontalLayout();
-        layoutCards.setWidth("1000px");
+        layoutCards.setWidth(Uti.ANCHO_INICIO);
         layoutCards.setPadding(false);
 
 
-        // todo -- recuperar solamente las tarjetas del usuario logeado
 
-//        List<Tarjeta> listadoTarjetas = tarjetaService.encuentraTarjetas();
+
+
         Usuario usuarioLogeado = authService.recuperaUsuarioLogeado();
         List<Tarjeta> listadoTarjetas = tarjetaService.tarjetasUsuarioPorId(usuarioLogeado.getId());
 
 
 
 
-        int numTarjetasAMostrar = 4;
+        int numTarjetasAMostrar = 3; // Número de tarjetas que se muestran en pantalla
         for (int i = 0; i < numTarjetasAMostrar ; i++) {
 
             if(i >= listadoTarjetas.size()) break;
