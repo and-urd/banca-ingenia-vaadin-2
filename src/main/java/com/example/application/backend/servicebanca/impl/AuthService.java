@@ -7,6 +7,7 @@ import com.example.application.backend.repositorybanca.UserRepository;
 import com.example.application.views.balance.BalanceView;
 import com.example.application.views.inicio.InicioView;
 import com.example.application.views.main.MainView;
+import com.example.application.views.prestamo.PrestamoAndresView;
 import com.example.application.views.prestamo.PrestamoView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
@@ -73,6 +74,7 @@ public class AuthService {
             routes.add(new AuthorizedRoute("movimientos", "Movimientos", MovimientosView.class));
             routes.add(new AuthorizedRoute("balance", "Balance", BalanceView.class));
             routes.add(new AuthorizedRoute("prestamo", "Prestamo", PrestamoView.class));
+            routes.add(new AuthorizedRoute("prestamo2", "Prestamo2", PrestamoAndresView.class));
 
         } else if (role.equals(Role.ADMIN)) {
             routes.add(new AuthorizedRoute("inicio", "Inicio", InicioView.class));
@@ -81,6 +83,7 @@ public class AuthService {
             routes.add(new AuthorizedRoute("movimientos", "Movimientos", MovimientosView.class));
             routes.add(new AuthorizedRoute("balance", "Balance", BalanceView.class));
             routes.add(new AuthorizedRoute("prestamo", "Prestamo", PrestamoView.class));
+            routes.add(new AuthorizedRoute("prestamo2", "Prestamo2", PrestamoAndresView.class));
         }
 
         return routes;

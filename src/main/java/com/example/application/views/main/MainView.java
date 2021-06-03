@@ -1,6 +1,7 @@
 package com.example.application.views.main;
 
 import com.example.application.views.balance.BalanceView;
+import com.example.application.views.prestamo.PrestamoAndresView;
 import com.example.application.views.prestamo.PrestamoView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
@@ -132,6 +133,7 @@ public class MainView extends AppLayout {
         tabs.add(createTab("Movimientos", MovimientosView.class));
         tabs.add(createTab("Balance", BalanceView.class));
         tabs.add(createTab("Préstamo", PrestamoView.class));
+        tabs.add(createTab("Préstamo(Andrés)", PrestamoAndresView.class));
     	return tabs.toArray(new Tab[tabs.size()]);
     }
     
