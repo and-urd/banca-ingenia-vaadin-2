@@ -41,17 +41,9 @@ public class Cuenta {
     @OneToMany(mappedBy = "cuenta")
     private List<Movimiento> movimientos = new ArrayList<>();
 
-//
-//    @OneToMany(mappedBy = "id_cuenta")
-//    private List<Prestamo> prestamos = new ArrayList<>();
-//
-//
 
-
-
-
-
-
+    @OneToMany(mappedBy = "cuentaIngreso")
+    private List<Prestamo> prestamos = new ArrayList<>();
 
 
     public Cuenta() {
@@ -121,7 +113,13 @@ public class Cuenta {
         this.entidad = entidad;
     }
 
+    public List<Prestamo> getPrestamos() {
+        return prestamos;
+    }
 
+    public void setPrestamos(List<Prestamo> prestamos) {
+        this.prestamos = prestamos;
+    }
 
     @Override
     public String toString() {
