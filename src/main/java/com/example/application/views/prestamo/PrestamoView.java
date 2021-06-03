@@ -34,7 +34,7 @@ public class PrestamoView extends VerticalLayout {
 
     private NumberField cantidad;
     private NumberField duracion;
-    private NumberField interes;
+    private NumberField tipoInteres;
     private ComboBox<Cuenta> cuentaIngreso;
     private ComboBox<Cuenta> cuentaCobro;
 
@@ -95,12 +95,12 @@ public class PrestamoView extends VerticalLayout {
         duracion.setLabel("Duración");
         prestamoBinder.forField(duracion);
 
-        interes = new NumberField();
-        interes.setId("interes");
-        interes.setLabel("Interes");
-        prestamoBinder.forField(interes);
+        tipoInteres = new NumberField();
+        tipoInteres.setId("interes");
+        tipoInteres.setLabel("Interes");
+        prestamoBinder.forField(tipoInteres);
 
-        formLayout.add(cuentaIngreso, cuentaCobro, cantidad, duracion, interes);
+        formLayout.add(cuentaIngreso, cuentaCobro, cantidad, duracion, tipoInteres);
         return formLayout;
     }
 
