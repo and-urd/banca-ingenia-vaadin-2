@@ -41,6 +41,19 @@ public class Cuenta {
     @OneToMany(mappedBy = "cuenta")
     private List<Movimiento> movimientos = new ArrayList<>();
 
+//
+//    @OneToMany(mappedBy = "id_cuenta")
+//    private List<Prestamo> prestamos = new ArrayList<>();
+//
+//
+
+
+
+
+
+
+
+
     public Cuenta() {
     }
 
@@ -107,6 +120,8 @@ public class Cuenta {
     public void setEntidad(String entidad) {
         this.entidad = entidad;
     }
+
+
 
     @Override
     public String toString() {
