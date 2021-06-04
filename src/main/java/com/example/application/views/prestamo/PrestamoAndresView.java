@@ -1,30 +1,25 @@
 package com.example.application.views.prestamo;
 
 import com.example.application.backend.modelbanca.Cuenta;
+import com.example.application.backend.modelbanca.Movimiento;
 import com.example.application.backend.modelbanca.Prestamo;
-import com.example.application.backend.modelbanca.Usuario;
+import com.example.application.backend.servicebanca.CategoriaService;
 import com.example.application.backend.servicebanca.CuentaService;
+import com.example.application.backend.servicebanca.MovimientoService;
 import com.example.application.backend.servicebanca.PrestamoService;
 import com.example.application.backend.servicebanca.impl.AuthService;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.BinderValidationStatus;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @PageTitle("Préstamo")
 public class PrestamoAndresView extends VerticalLayout {
@@ -33,13 +28,16 @@ public class PrestamoAndresView extends VerticalLayout {
     private final PrestamoService prestamoService;
     private final AuthService authService;
     private final CuentaService cuentaService;
+    private final MovimientoService movimientoService;
+    private final CategoriaService categoriaService;
 
 
-    public PrestamoAndresView(PrestamoService prestamoService, AuthService authService, CuentaService cuentaService){
+    public PrestamoAndresView(PrestamoService prestamoService, AuthService authService, CuentaService cuentaService, MovimientoService movimientoService, CategoriaService categoriaService){
         this.prestamoService = prestamoService;
         this.authService = authService;
         this.cuentaService = cuentaService;
-
+        this.movimientoService = movimientoService;
+        this.categoriaService = categoriaService;
 
 
         FormLayout layoutWithBinder = new FormLayout();
@@ -118,6 +116,8 @@ public class PrestamoAndresView extends VerticalLayout {
                 infoLabel.setText("Saved bean values: " + prestamoBeingEdited);
 
 
+                crearPrestamo();
+
 
             } else {
                 BinderValidationStatus<Prestamo> validate = binder.validate();
@@ -135,6 +135,55 @@ public class PrestamoAndresView extends VerticalLayout {
             infoLabel.setText("");
         });
         add(layoutWithBinder, actions, infoLabel);
+
+
+
+    }
+
+    private void crearPrestamo(/*Prestamo prestamo*/) {
+
+        Prestamo prestamo = new Prestamo();
+            prestamo.setCantidad(3000d);
+            prestamo.setDuracion(12d);
+            prestamo.setTipoInteres(0.3d);
+            prestamo.setCuentaIngreso(cuentaService.recuperarCuentaPorId(1L).get());
+            prestamo.setCuentaCobro(cuentaService.recuperarCuentaPorId(2L).get());
+
+        Double cantidad = prestamo.getCantidad();
+        Double duracion = prestamo.getDuracion();
+        Double tipoInteres = prestamo.getTipoInteres();
+        Cuenta cuentaIngreso = prestamo.getCuentaIngreso();
+        Cuenta cuentaCobro = prestamo.getCuentaCobro();
+
+        // CREACIÓN DE PRESTAMO
+        // Persistimos el prestamo en BBDD
+        prestamoService.createPrestamo(prestamo);
+
+
+        // SIMULACIÓN DE LA EJECUCIÓN DE PRESTAMO
+        // Se crea un movimiento en la cuenta de INGRESO de la cantidad del prestamo,
+        Movimiento movimientoIngreso = new Movimiento();
+            movimientoIngreso.setCantidad(cantidad);
+
+
+
+            movimientoIngreso.setCategoria(categoriaService.encuentraPorTipoCategoria("Préstamo"));
+            movimientoIngreso.setConcepto("Ingreso Préstamo");
+            movimientoIngreso.setCuenta(cuentaIngreso);
+            movimientoIngreso.setFechaOperacion(LocalDate.now());
+            movimientoIngreso.setFechaValor(LocalDate.now());
+            movimientoIngreso.setSaldoActual(cuentaIngreso.getSaldo() + cantidad);
+
+            // Persistimos el movimiento en BBDD
+        movimientoService.creaMovimiento(movimientoIngreso);
+
+        // se actualiza el saldo de la cuenta INGRESO y persiste la cuenta
+            cuentaIngreso.setSaldo(cuentaIngreso.getSaldo() + cantidad);
+            cuentaService.actualizaCuenta(cuentaIngreso);
+
+
+        // Se realizan los movimientos correspondientes en la cuenta de COBRO
+
 
 
 
