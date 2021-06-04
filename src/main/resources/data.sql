@@ -9,7 +9,9 @@ INSERT INTO categorias (tipo_categoria) VALUES
 	 ('Regalos'),
 	 ('Varios'),
 	 ('Domiciliacion'),
-	 ('Electrónica');
+	 ('Electrónica'),
+	 ('Préstamo');
+
 
 -- CUENTAS --
 INSERT INTO cuentas (entidad,numero_cuenta,saldo,tipo_cuenta) VALUES

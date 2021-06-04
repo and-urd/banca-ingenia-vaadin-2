@@ -29,4 +29,6 @@ public interface CuentaService {
     // Recupera listado de Cuentas de un usuario por su Id
     List<Cuenta> encuentraCuentasDeUsuario(Long idUsuario);
 
+    // Actualiza una Cuenta
+    Cuenta actualizaCuenta(Cuenta cuenta);
 }
