@@ -27,7 +27,7 @@ public class PrestamoView extends VerticalLayout {
     private final PrestamoService prestamoService;
     private final AuthService authService;
     private final CuentaService cuentaService;
-    private Prestamo prestamo;
+    private Prestamo prestamo = new Prestamo();
     private Binder<Prestamo>prestamoBinder = new BeanValidationBinder<>(Prestamo.class);
 
     private FormLayout formLayout;
@@ -105,9 +105,10 @@ public class PrestamoView extends VerticalLayout {
     }
 
     private Component createToolbarLayout(){
-        Button saveButton = new Button("Confirm", event -> {
-            prestamoBinder.writeBeanIfValid(prestamo);
-            prestamoService.createPrestamo(prestamo);
+        Button saveButton = new Button("Confirm");
+        saveButton.addClickListener(clickEvent -> {
+            prestamoBinder.writeBeanIfValid(getPrestamo());
+            prestamoService.createPrestamo(getPrestamo());
         });
         HorizontalLayout formToolBar = new HorizontalLayout(saveButton);
         formToolBar.setWidthFull();
