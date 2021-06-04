@@ -158,6 +158,9 @@ public class MainView extends AppLayout {
             case "Balance":
                 icono = new Icon(VaadinIcon.BAR_CHART);
                 break;
+            case "Préstamo":
+                icono = new Icon(VaadinIcon.MONEY);
+                break;
             default:
                 icono = new Icon();
         }

@@ -7,14 +7,19 @@ import com.example.application.backend.servicebanca.CuentaService;
 import com.example.application.backend.servicebanca.PrestamoService;
 import com.example.application.backend.servicebanca.impl.AuthService;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Hr;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
+import com.vaadin.flow.component.textfield.TextFieldVariant;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
@@ -46,6 +51,8 @@ public class PrestamoView extends VerticalLayout {
         add(createTitle(),createFormLayout(), new Hr(), createToolbarLayout());
 
         prestamoBinder.bindInstanceFields(this);
+
+        setWidth("800px");
     }
 
     public void setPrestamo(Prestamo prestamo){
@@ -74,30 +81,36 @@ public class PrestamoView extends VerticalLayout {
         cuentaIngreso = new ComboBox<Cuenta>();
         cuentaIngreso.setId("cuentaIngreso");
         cuentaIngreso.setItemLabelGenerator(Cuenta::getEntidad);
-        cuentaIngreso.setLabel("Cuenta Ingreso");
+        cuentaIngreso.setLabel("Cuenta de Ingreso");
         cuentaIngreso.setItems(getCuentas());
         prestamoBinder.forField(cuentaIngreso);
 
         cuentaCobro = new ComboBox<Cuenta>();
         cuentaCobro.setId("cuentaCobro");
         cuentaCobro.setItemLabelGenerator(Cuenta::getEntidad);
-        cuentaCobro.setLabel("Cuenta Cobro");
+        cuentaCobro.setLabel("Cuenta de Cobro");
         cuentaCobro.setItems(getCuentas());
         prestamoBinder.forField(cuentaCobro);
 
         cantidad = new NumberField();
         cantidad.setId("cantidad");
         cantidad.setLabel("Cantidad");
+        cantidad.setSuffixComponent(new Icon(VaadinIcon.EURO));
+        cantidad.addThemeVariants(TextFieldVariant.LUMO_ALIGN_RIGHT);
         prestamoBinder.forField(cantidad);
 
         duracion = new NumberField();
         duracion.setId("duracion");
-        duracion.setLabel("Duración");
+        duracion.setLabel("Duración en meses");
+        duracion.setSuffixComponent(new Icon(VaadinIcon.TIMER));
+        duracion.addThemeVariants(TextFieldVariant.LUMO_ALIGN_RIGHT);
         prestamoBinder.forField(duracion);
 
         tipoInteres = new NumberField();
         tipoInteres.setId("interes");
-        tipoInteres.setLabel("Interes");
+        tipoInteres.setLabel("Interés");
+        tipoInteres.setSuffixComponent(new Icon(VaadinIcon.BOOK_PERCENT));
+        tipoInteres.addThemeVariants(TextFieldVariant.LUMO_ALIGN_RIGHT);
         prestamoBinder.forField(tipoInteres);
 
         formLayout.add(cuentaIngreso, cuentaCobro, cantidad, duracion, tipoInteres);
@@ -105,12 +118,19 @@ public class PrestamoView extends VerticalLayout {
     }
 
     private Component createToolbarLayout(){
-        Button saveButton = new Button("Confirm");
+        Button saveButton = new Button("Confirmar");
         saveButton.addClickListener(clickEvent -> {
             prestamoBinder.writeBeanIfValid(getPrestamo());
             prestamoService.createPrestamo(getPrestamo());
         });
-        HorizontalLayout formToolBar = new HorizontalLayout(saveButton);
+
+        Button cancelButton = new Button("Cancelar");
+        cancelButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        cancelButton.addClickListener(clickEvent -> {
+            UI.getCurrent().getPage().reload();
+        });
+
+        HorizontalLayout formToolBar = new HorizontalLayout(saveButton, cancelButton);
         formToolBar.setWidthFull();
 
         return formToolBar;
