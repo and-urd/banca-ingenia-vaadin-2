@@ -150,6 +150,63 @@ public class PrestamoView extends VerticalLayout {
     }
 
 
+    public class CobroPrestamoHilo extends Thread{
+
+
+        Double duracion;
+        Double cantidad;
+        Double tipoInteres;
+        Cuenta cuentaCobro;
+        int tiempoIntervaloSimulacion; // en Segundos
+
+        public CobroPrestamoHilo(Double duracion, Double cantidad, Double tipoInteres, Cuenta cuentaCobro, int tiempoIntervaloSimulacion) {
+            this.duracion = duracion;
+            this.cantidad = cantidad;
+            this.tipoInteres = tipoInteres;
+            this.cuentaCobro = cuentaCobro;
+            this.tiempoIntervaloSimulacion = tiempoIntervaloSimulacion * 1000;
+        }
+
+        public void run(){
+
+            Double cuota = 0d;
+            for (int i = 0; i < duracion; i++) {
+                Movimiento movimiento = new Movimiento();
+                movimiento.setNumTarjeta("");
+
+                cuota = calculoCuotaPrestamo(cantidad, tipoInteres, duracion, i + 1);
+
+                cuentaCobro = cuentaService.recuperarCuentaPorId(cuentaCobro.getId()).get();
+                movimiento.setCuenta(cuentaCobro);
+                movimiento.setCategoria(categoriaService.encuentraPorTipoCategoria("Préstamo"));
+                movimiento.setFechaValor(LocalDate.now());
+                movimiento.setFechaOperacion(LocalDate.now());
+
+                movimiento.setConcepto("Cuota préstamo " + (i+1) + "/" + Math.round(duracion));
+                movimiento.setCantidad(-1*cuota);
+                movimiento.setSaldoActual(cuentaCobro.getSaldo() - cuota);
+
+                // todo -- detener la ejecución por un tiempo
+                try{
+                    Thread.sleep(this.tiempoIntervaloSimulacion);
+                } catch(InterruptedException e ) {
+                    System.out.println("Thread Interrupted");
+                }
+
+
+                // Persistimos en BBDD
+                movimientoService.creaMovimiento(movimiento);
+
+                // Actualizamos el saldo de la cuenta
+                cuentaCobro.setSaldo(cuentaCobro.getSaldo() - cuota);
+                cuentaService.actualizaCuenta(cuentaCobro);
+
+            }
+
+
+
+        }
+    }
 
     private void crearPrestamo(Prestamo prestamo) {
 
@@ -191,40 +248,9 @@ public class PrestamoView extends VerticalLayout {
 
         // Calculo de la cuota mensual del préstamo
 
-        Double cuota = 0d;
-
-        for (int i = 0; i < duracion; i++) {
-            Movimiento movimiento = new Movimiento();
-            movimiento.setNumTarjeta("");
-
-            cuota = calculoCuotaPrestamo(cantidad, tipoInteres, duracion, i + 1);
-
-            cuentaCobro = cuentaService.recuperarCuentaPorId(cuentaCobro.getId()).get();
-            movimiento.setCuenta(cuentaCobro);
-            movimiento.setCategoria(categoriaService.encuentraPorTipoCategoria("Préstamo"));
-            movimiento.setFechaValor(LocalDate.now());
-            movimiento.setFechaOperacion(LocalDate.now());
-
-            movimiento.setConcepto("Cuota préstamo " + (i+1) + "/" + duracion);
-            movimiento.setCantidad(-1*cuota);
-            movimiento.setSaldoActual(cuentaCobro.getSaldo() - cuota);
-
-            // todo -- detener la ejecución por un tiempo
-            try{
-                Thread.sleep(1000);
-            } catch(InterruptedException e ) {
-                System.out.println("Thread Interrupted");
-            }
-
-
-            // Persistimos en BBDD
-            movimientoService.creaMovimiento(movimiento);
-
-            // Actualizamos el saldo de la cuenta
-            cuentaCobro.setSaldo(cuentaCobro.getSaldo() - cuota);
-            cuentaService.actualizaCuenta(cuentaCobro);
-
-        }
+        // SIMULACIÓN DE COBRO EN LA CUENTA
+        CobroPrestamoHilo hilo = new CobroPrestamoHilo(duracion, cantidad, tipoInteres, cuentaCobro, 1);
+        hilo.start();
 
 
 
