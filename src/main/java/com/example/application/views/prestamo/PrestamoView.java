@@ -158,13 +158,16 @@ public class PrestamoView extends VerticalLayout {
         Double tipoInteres;
         Cuenta cuentaCobro;
         int tiempoIntervaloSimulacion; // en Segundos
+        Long idPrestamo;
 
-        public CobroPrestamoHilo(Double duracion, Double cantidad, Double tipoInteres, Cuenta cuentaCobro, int tiempoIntervaloSimulacion) {
+        public CobroPrestamoHilo(Double duracion, Double cantidad, Double tipoInteres, Cuenta cuentaCobro, int tiempoIntervaloSimulacion, Long idPrestamo) {
             this.duracion = duracion;
             this.cantidad = cantidad;
             this.tipoInteres = tipoInteres;
             this.cuentaCobro = cuentaCobro;
             this.tiempoIntervaloSimulacion = tiempoIntervaloSimulacion * 1000;
+            this.idPrestamo = idPrestamo;
+
         }
 
         public void run(){
@@ -182,7 +185,7 @@ public class PrestamoView extends VerticalLayout {
                 movimiento.setFechaValor(LocalDate.now());
                 movimiento.setFechaOperacion(LocalDate.now());
 
-                movimiento.setConcepto("Cuota préstamo " + (i+1) + "/" + Math.round(duracion));
+                movimiento.setConcepto("Préstamo (id:" + idPrestamo + ") " + (i+1) + "/" + Math.round(duracion));
                 movimiento.setCantidad(-1*cuota);
                 movimiento.setSaldoActual(cuentaCobro.getSaldo() - cuota);
 
@@ -249,7 +252,7 @@ public class PrestamoView extends VerticalLayout {
         // Calculo de la cuota mensual del préstamo
 
         // SIMULACIÓN DE COBRO EN LA CUENTA
-        CobroPrestamoHilo hilo = new CobroPrestamoHilo(duracion, cantidad, tipoInteres, cuentaCobro, 1);
+        CobroPrestamoHilo hilo = new CobroPrestamoHilo(duracion, cantidad, tipoInteres, cuentaCobro, 10, prestamo.getId());
         hilo.start();
 
 
