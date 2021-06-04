@@ -52,9 +52,4 @@ public class PrestamoServiceImpl implements PrestamoService {
         if (id != null && prestamoRepository.existsById(id))
             prestamoRepository.deleteById(id);
     }
-
-    //TODO
-    public Double calcularInteres (Double tipoInteres){
-        return null;
-    }
 }
