@@ -108,8 +108,9 @@ public class PanelMovimientosInicio extends VerticalLayout {
             }
             return icon;
         }).setKey("icon").setHeader("").setFlexGrow(0).setWidth("60px");
-        movimientoGrid.addColumn(item -> TarjetasView.tarjetaUltimosDigitos(item.getNumTarjeta())).setHeader("Nº Tarjeta").setSortable(true);
-        movimientoGrid.addColumn(Movimiento::getCantidad).setHeader("Cantidad").setSortable(true);
+        movimientoGrid.addColumn(item -> TarjetasView.tarjetaUltimosDigitos(item.getNumTarjeta())).setHeader("Tarjeta")
+                .setSortable(true).setFlexGrow(0).setWidth("110px");
+        movimientoGrid.addColumn(Movimiento::getCantidad).setHeader("Cantidad").setSortable(true).setFlexGrow(0).setWidth("110px");
         movimientoGrid.addColumn(Movimiento::getConcepto).setHeader("Concepto").setSortable(true);
         movimientoGrid.addColumn(Movimiento::getFechaOperacion).setHeader("Fecha").setSortable(true);
 
