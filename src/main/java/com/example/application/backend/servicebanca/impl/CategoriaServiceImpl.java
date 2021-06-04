@@ -37,4 +37,14 @@ public class CategoriaServiceImpl implements CategoriaService {
     public void borrarCategoria(Categoria categoria) {
         categoriaRepository.deleteById(categoria.getId());
     }
+
+    @Override
+    public Categoria encuentraPorTipoCategoria(String tipoCategoria) {
+        if(tipoCategoria.equals("")){
+            return null;
+        }else{
+            Categoria categoriaResultado = categoriaRepository.findByTipoCategoria(tipoCategoria);
+            return categoriaResultado;
+        }
+    }
 }

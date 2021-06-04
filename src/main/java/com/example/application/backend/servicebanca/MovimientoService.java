@@ -10,6 +10,9 @@ import java.util.Optional;
 
 public interface MovimientoService {
 
+    // Crea movimiento en BBDD
+    Movimiento creaMovimiento(Movimiento movimiento);
+
     List<Movimiento>recuperaMovimientosPorIdUsuarioFiltrados(Long id, Map<String, String> customQuery);
 
     // Recupera movimientos de un usuario por id

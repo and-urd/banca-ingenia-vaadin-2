@@ -171,11 +171,15 @@ public class CuentaServiceImpl implements CuentaService {
 
         return listadoResultante;
 
+    }
 
-
-
-
-
+    @Override
+    public Cuenta actualizaCuenta(Cuenta cuenta) {
+        if(cuenta.getId() == null){
+            return null;
+        }else {
+            return cuentaRepository.save(cuenta);
+        }
     }
 
 //    @Override

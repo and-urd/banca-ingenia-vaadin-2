@@ -15,5 +15,7 @@ public interface CategoriaService {
     // Borrar categoria
     void borrarCategoria(Categoria categoria);
 
+    Categoria encuentraPorTipoCategoria(String tipoCategoria);
+
 
 }

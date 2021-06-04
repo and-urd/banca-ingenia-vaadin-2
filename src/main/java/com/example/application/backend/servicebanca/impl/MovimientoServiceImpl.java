@@ -26,9 +26,19 @@ public class MovimientoServiceImpl implements MovimientoService {
         this.movimientoDAO = movimientoDAO;
     }
 
+    @Override
+    public Movimiento creaMovimiento(Movimiento movimiento) {
+        if(movimiento.getId() != null){
+            return null;
+        }else{
+           return movimientoRepository.save(movimiento);
+        }
+
+    }
+
     /*
-   Recupera Movimientos por IdUsuario y los filtra por un rango de Fecha y Categoria
-    */
+       Recupera Movimientos por IdUsuario y los filtra por un rango de Fecha y Categoria
+        */
     @Override
     public List<Movimiento> recuperaMovimientosPorIdUsuarioFiltrados(Long id, Map<String, String> customQuery) {
         if (recuperaMovimientosPorIdUsuario(id) == null){
