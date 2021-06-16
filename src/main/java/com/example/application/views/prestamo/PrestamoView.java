@@ -9,6 +9,7 @@ import com.example.application.backend.servicebanca.CuentaService;
 import com.example.application.backend.servicebanca.MovimientoService;
 import com.example.application.backend.servicebanca.PrestamoService;
 import com.example.application.backend.servicebanca.impl.AuthService;
+import com.example.application.views.Uti;
 import com.example.application.views.inicio.InicioView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
@@ -160,6 +161,15 @@ public class PrestamoView extends VerticalLayout {
         int tiempoIntervaloSimulacion; // en Segundos
         Long idPrestamo;
 
+        /**
+         *
+         * @param duracion en meses
+         * @param cantidad total del préstamo
+         * @param tipoInteres % de intereses
+         * @param cuentaCobro la cuenta donde se van a cobrar las cuotas
+         * @param tiempoIntervaloSimulacion en segundos
+         * @param idPrestamo
+         */
         public CobroPrestamoHilo(Double duracion, Double cantidad, Double tipoInteres, Cuenta cuentaCobro, int tiempoIntervaloSimulacion, Long idPrestamo) {
             this.duracion = duracion;
             this.cantidad = cantidad;
@@ -172,8 +182,24 @@ public class PrestamoView extends VerticalLayout {
 
         public void run(){
 
+            while(Uti.hilo_trabajando == true){
+                try {
+                    System.out.println("Esperando(idPrestamo " + idPrestamo +  ")... -> Hilo esperando: " + Uti.hilo_trabajando);
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // Se informa de que el hilo ha empezado a trabajar
+            Uti.hilo_trabajando = true;
+            System.out.println("(idPrestamo " + idPrestamo +  ")... -> Hilo iniciado (true)");
+
             Double cuota = 0d;
             for (int i = 0; i < duracion; i++) {
+
+                System.out.println("(idPrestamo " + idPrestamo +  ")... -> Hilo trabajando: iteración = " + i );
+
                 Movimiento movimiento = new Movimiento();
                 movimiento.setNumTarjeta("");
 
@@ -206,8 +232,9 @@ public class PrestamoView extends VerticalLayout {
 
             }
 
-
-
+            // Se informa de que el hilo ha parado
+            Uti.hilo_trabajando = false;
+            System.out.println("Esperando(idPrestamo " + idPrestamo +  ")... -> Hilo parado(false)   ");
         }
     }
 
